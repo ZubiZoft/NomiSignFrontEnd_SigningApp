@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="LogoutAction" datatype="html">
+        <source>Logout</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src\app\app.component.ts</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <note priority="1" from="description"> user will click this to log out of the website</note>
+        <note priority="1" from="meaning">action </note>
+      </trans-unit>
+      <trans-unit id="DocumentTitle" datatype="html">
+        <source>Documents</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src\app\components\documents\documents.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <note priority="1" from="description"> title for a list of documents</note>
+        <note priority="1" from="meaning">title </note>
+      </trans-unit>
+      <trans-unit id="ShowAllDocChkBox" datatype="html">
+        <source>Show all documents?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src\app\components\documents\documents.component.ts</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <note priority="1" from="description"> ask to show all documents in list</note>
+        <note priority="1" from="meaning">question </note>
+      </trans-unit>
+      <trans-unit id="DocumentIdTitle" datatype="html">
+        <source>Document Id</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src\app\components\documents\documents.component.ts</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <note priority="1" from="description"> the id of the document</note>
+        <note priority="1" from="meaning">title </note>
+      </trans-unit>
+      <trans-unit id="DocumentSignStatusTitle" datatype="html">
+        <source>Sign Status</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src\app\components\documents\documents.component.ts</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+        <note priority="1" from="description"> the sign status of the document</note>
+        <note priority="1" from="meaning">title </note>
+      </trans-unit>
+      <trans-unit id="DocumentIdHeader" datatype="html">
+        <source>Document Id : <x id="INTERPOLATION"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src\app\components\documents\documents.component.ts</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <note priority="1" from="description"> the id of the document in the list</note>
+        <note priority="1" from="meaning">header </note>
+      </trans-unit>
+      <trans-unit id="PayPeriodHeader" datatype="html">
+        <source>PayPeriod Date: <x id="INTERPOLATION"/> </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src\app\components\documents\documents.component.ts</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+        <note priority="1" from="description"> the pay period date of the document in the list</note>
+        <note priority="1" from="meaning">header </note>
+      </trans-unit>
+      <trans-unit id="DocumentSignStatusHeader" datatype="html">
+        <source>Sign Status: <x id="INTERPOLATION"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src\app\components\documents\documents.component.ts</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src\app\components\documentDetail\documentDetail.component.ts</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src\app\components\documentDetail\documentDetail.component.ts</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+        <note priority="1" from="description"> the sign status of the document in the list</note>
+        <note priority="1" from="meaning">header </note>
+      </trans-unit>
+      <trans-unit id="41660343d34a8db93826e9c6958006d217a71541" datatype="html">
+        <source>Problem loading image</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src\app\components\documentDetail\documentDetail.component.ts</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <note priority="1" from="description">The image could not be loaded</note>
+        <note priority="1" from="meaning">text when image fails</note>
+      </trans-unit>
+      <trans-unit id="DocumentActionSign" datatype="html">
+        <source> Sign </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src\app\components\documentDetail\documentDetail.component.ts</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <note priority="1" from="description"> the user can click to sign the document</note>
+        <note priority="1" from="meaning">action </note>
+      </trans-unit>
+      <trans-unit id="GoBackAction" datatype="html">
+        <source> Go Back </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src\app\components\documentDetail\documentDetail.component.ts</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <note priority="1" from="description"> User can use this to navigate to previous page</note>
+        <note priority="1" from="meaning">action </note>
+      </trans-unit>
+      <trans-unit id="DocumentSignedNotice" datatype="html">
+        <source> Document was signed</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src\app\components\documentDetail\documentDetail.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <note priority="1" from="description"> alert notifying the user they signed the document</note>
+        <note priority="1" from="meaning">notice </note>
+      </trans-unit>
+      <trans-unit id="DocumentRejectedNotice" datatype="html">
+        <source> Document was rejected</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src\app\components\documentDetail\documentDetail.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <note priority="1" from="description"> alert notifying the user they rejected the document</note>
+        <note priority="1" from="meaning">notice </note>
+      </trans-unit>
+      <trans-unit id="PageNotFoundMessage" datatype="html">
+        <source> The page you requested was not found. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src\app\components\notfound\notfound.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <note priority="1" from="description"> letting the user know that the page they tried to go to does not exist</note>
+        <note priority="1" from="meaning">message </note>
+      </trans-unit>
+      <trans-unit id="LoginFormHeader" datatype="html">
+        <source>Login</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src\app\components\login\login.component.ts</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <note priority="1" from="description"> header for where the user will enter their login credentials </note>
+        <note priority="1" from="meaning">header </note>
+      </trans-unit>
+      <trans-unit id="UsernameRequiredMessage" datatype="html">
+        <source>
+            Username is <x id="START_TAG_STRONG" ctype="x-strong"/>required<x id="CLOSE_TAG_STRONG" ctype="x-strong"/>
+          </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src\app\components\login\login.component.ts</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <note priority="1" from="description"> letting the user know that they need to enter their username</note>
+        <note priority="1" from="meaning">message </note>
+      </trans-unit>
+      <trans-unit id="PasswordRequiredMessage" datatype="html">
+        <source>
+            Password is <x id="START_TAG_STRONG" ctype="x-strong"/>required<x id="CLOSE_TAG_STRONG" ctype="x-strong"/>
+          </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src\app\components\login\login.component.ts</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+        <note priority="1" from="description"> letting the user know that they need to enter their password</note>
+        <note priority="1" from="meaning">message </note>
+      </trans-unit>
+      <trans-unit id="LoginButtonAction" datatype="html">
+        <source> Login </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src\app\components\login\login.component.ts</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+        <note priority="1" from="description"> user will click this to login to thet website</note>
+        <note priority="1" from="meaning">action </note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

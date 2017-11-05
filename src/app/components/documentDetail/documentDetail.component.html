@@ -1,0 +1,23 @@
+<div *ngIf="document" style="text-align:center">
+
+    <h1 i18n="header | Header for the document displayed below@@DocumentSignStatusHeader">Document {{document.DocumentId}} details</h1>
+    <div style="display:inline-block">
+        <div style="float:left">
+            <button md-raised-button color="primary" (click)="signDocument()" i18n="action | the user can click to sign the document@@DocumentActionSign"> Sign </button>
+            <button md-raised-button [routerLink]="['/documents']" style="margin-left:25px" i18n="action | User can use this to navigate to previous page@@GoBackAction"> Go Back </button>
+        </div>
+        <div style="float:right">
+            <button md-raised-button color="warn" (click)="refuseDocument()" i18n="action | the user can click to reject the document @@DocumentSignStatusHeader"> Reject </button>
+        </div>
+        <div style="clear:both; margin-bottom: 10px"></div>
+        <img style="display:block; margin-bottom:25px; border: 1px solid" src="{{document.DocumentBytes}}" alt="Problem loading image"
+            i18n-alt="text when image fails|The image could not be loaded" class="mobileImageDisplay"/>
+        <div style="float:left">
+            <button md-raised-button color="primary" (click)="signDocument()" i18n="action | the user can click to sign the document@@DocumentActionSign"> Sign </button>
+            <button md-raised-button [routerLink]="['/documents']" style="margin-left:25px" i18n="action | User can use this to navigate to previous page@@GoBackAction"> Go Back </button>
+        </div>
+        <div style="float:right">
+            <button md-raised-button color="warn" (click)="refuseDocument()" i18n="action | the user can click to reject the document @@DocumentSignStatusHeader"> Reject </button>
+        </div>
+    </div>
+</div>

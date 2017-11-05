@@ -1,0 +1,28 @@
+.example-form {
+  min-width: 150px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 50%;
+}
+
+@media (max-device-width: 720px) {
+  .loginLogoMobile {
+     float: unset !important;
+  }
+  .loginTitleMobile {
+    width:90% !important;
+    margin: 5%;
+  }
+
+  .loginFormMobile {
+    float: unset !important;
+    width: 75%!important
+  }
+
+  .loginFormFieldsMobile {
+    width: 30% !important;
+  }
+    
+ }

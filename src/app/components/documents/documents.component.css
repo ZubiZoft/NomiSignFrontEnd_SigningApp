@@ -1,0 +1,15 @@
+@media (max-device-width: 720px) {
+    .mobileHeader{
+        float: left;
+        margin-left:5px;
+    }
+
+    .mobileCheckbox{
+        width:90% !important;
+    }
+
+    .mobileTableDisplay{
+        width: 100% !important;
+    }
+      
+   }
