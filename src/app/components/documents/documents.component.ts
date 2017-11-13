@@ -17,6 +17,7 @@ import { Sort } from '@angular/material';
 export class DocumentsComponent implements OnInit {
     user: User
     documents: Document[]
+    isPromiseDone: boolean = false
     showAll = false
     docsWithSignStatus1Exist = false
 
@@ -57,6 +58,7 @@ export class DocumentsComponent implements OnInit {
             }); 
             this.documents = data;
             this.sortedDocument = this.documents.slice();
+            this.isPromiseDone = true;
         });
     }
 }

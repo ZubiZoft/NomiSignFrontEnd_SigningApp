@@ -4,7 +4,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 //angular material imports
-import { MdSnackBar } from '@angular/material'
+import { MatSnackBar } from '@angular/material'
 //rxjs imports
 import "rxjs/add/operator/switchMap";
 //custom imports
@@ -21,11 +21,12 @@ import { DocumentDetail } from '../../models/documentDetail.model'
 })
 export class DocumentDetailComponent implements OnInit {
     test: string = 'just a test';
+    isPromiseDone: boolean = false
     user: User
     document: DocumentDetail
 
     constructor(private documentService: DocumentService, private userService: UserService, private route: ActivatedRoute,
-                private sanitizer: DomSanitizer, public snackBar: MdSnackBar) {
+                private sanitizer: DomSanitizer, public snackBar: MatSnackBar) {
 
     }
 
@@ -34,6 +35,7 @@ export class DocumentDetailComponent implements OnInit {
         this.route.paramMap
         .switchMap((params: ParamMap) => this.documentService.getUserDocumentData(this.user.EmployeeId ,params.get('id')))
         .subscribe(data => this.document = data);   
+        this.isPromiseDone = true; 
     }
 
     signDocument(){

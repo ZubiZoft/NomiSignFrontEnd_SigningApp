@@ -1,22 +1,23 @@
+<mat-spinner style="margin:0 auto;" *ngIf="!isPromiseDone"></mat-spinner>
 <h2 style="text-align:center; margin: 0 auto" i18n="title | title for a list of documents@@DocumentTitle" class="mobileHeader">Documents</h2>
 <div style="width: 75%; margin: 0 auto; text-align: end" class="mobileCheckbox">
-    <md-checkbox [(ngModel)]="showAll" color="primary" i18n="question | ask to show all documents in list@@ShowAllDocChkBox">Show all documents?</md-checkbox>
+    <mat-checkbox [(ngModel)]="showAll" color="primary" i18n="question | ask to show all documents in list@@ShowAllDocChkBox">Show all documents?</mat-checkbox>
 </div>
  <div *ngIf="(docsWithSignStatus1Exist || showAll)"  style="width: 75%; margin:auto;" class="mobileTableDisplay">
-    <md-list mdSort (mdSortChange)="sortDocuments($event)">
-        <h3 md-sort-header="DocumentId" style="float:left; padding-left:50px" i18n="title | the id of the document@@DocumentIdTitle">Document Id</h3>
-        <h3 md-sort-header="SignStatus" style="float:right; padding-right:50px" i18n="title | the sign status of the document@@DocumentSignStatusTitle">Sign Status</h3>
+    <mat-list matSort (matSortChange)="sortDocuments($event)">
+        <h3 mat-sort-header="DocumentId" style="float:left; padding-left:50px" i18n="title | the id of the document@@DocumentIdTitle">Document Id</h3>
+        <h3 mat-sort-header="SignStatus" style="float:right; padding-right:50px" i18n="title | the sign status of the document@@DocumentSignStatusTitle">Sign Status</h3>
         <div style="clear:both"></div>
         <div style="max-height:75vh; overflow-y:auto">
             <ng-container *ngFor="let doc of sortedDocument">
-                <md-list-item *ngIf="showAll || doc.SignStatus === 'Unsigned'" style="border-bottom: 1px solid grey" [routerLink]="['/documents', doc.DocumentId]">
-                    <md-icon md-list-icon>insert_drive_file</md-icon>
-                    <h4 md-line i18n="header | the id of the document in the list@@DocumentIdHeader">Document Id : {{doc.DocumentId}}</h4>
-                    <p md-line i18n="header | the pay period date of the document in the list@@PayPeriodHeader">PayPeriod Date: {{doc.PayperiodDate | date}} </p>
+                <mat-list-item *ngIf="showAll || doc.SignStatus === 'Unsigned'" style="border-bottom: 1px solid grey" [routerLink]="['/documents', doc.DocumentId]">
+                    <mat-icon mat-list-icon>insert_drive_file</mat-icon>
+                    <h4 mat-line i18n="header | the id of the document in the list@@DocumentIdHeader">Document Id : {{doc.DocumentId}}</h4>
+                    <p mat-line i18n="header | the pay period date of the document in the list@@PayPeriodHeader">PayPeriod Date: {{doc.PayperiodDate | date}} </p>
                     <span i18n="header | the sign status of the document in the list@@DocumentSignStatusHeader">Sign Status: {{doc.SignStatus}}</span>
-                </md-list-item>
+                </mat-list-item>
             </ng-container>
         </div>
-    </md-list>
+    </mat-list>
 </div>
 <h4 *ngIf="!documents || (!docsWithSignStatus1Exist && !showAll)" style="text-align: center" i18n="message | a message to let the user know there are no documents to view@@DocumentSignStatusHeader"> There are no documents to view at this time. </h4>

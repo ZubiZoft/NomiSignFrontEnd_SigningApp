@@ -7,42 +7,42 @@
 <h1 class="toolbar" *ngIf="username">
 
   <span style="display:none" class="displayContentMobile">
-            <button md-button [mdMenuTriggerFor]="mobileMenu"> <md-icon>menu</md-icon> </button>
+            <button mat-button [matMenuTriggerFor]="mobileMenu"> <mat-icon>menu</mat-icon> </button>
       
-            <md-menu #mobileMenu="mdMenu">
-              <button md-menu-item routerLink="/documents" routerLinkActive="active" i18n="@@GoHomePageMenuHeader"> Home </button>
-            </md-menu>
+            <mat-menu #mobileMenu="matMenu">
+              <button mat-menu-item routerLink="/documents" routerLinkActive="active" i18n="@@GoHomePageMenuHeader"> Home </button>
+            </mat-menu>
             <span style="float:right" *ngIf="username">
-              <button md-button [mdMenuTriggerFor]="menu">
-                <md-icon>person</md-icon>{{username}}<md-icon>arrow_drop_down</md-icon>
+              <button mat-button [matMenuTriggerFor]="menu">
+                <mat-icon>person</mat-icon>{{username}}<mat-icon>arrow_drop_down</mat-icon>
               </button>
-              <md-menu #menu="mdMenu">
-                <button md-menu-item (click)="logout()">
-                  <md-icon>exit_to_app</md-icon>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="logout()">
+                  <mat-icon>exit_to_app</mat-icon>
                   <span i18n="action | user will click this to log out of the website@@LogoutAction">Logout</span>
                 </button>
-              </md-menu>
+              </mat-menu>
              </span>
   </span>
 
   <div style="margin-left:12%">
     <span class="hideContentMobile">
-      <button md-button routerLink="/documents" routerLinkActive="active">
+      <button mat-button routerLink="/documents" routerLinkActive="active">
         <span i18n="menu header | User will click this to navigate to the home page@@GoHomePageMenuHeader">
           Home 
         </span>
       </button>
 
       <span style="float:right" *ngIf="username">
-        <button md-button [mdMenuTriggerFor]="menu">
-          <md-icon>person</md-icon>{{username}}<md-icon>arrow_drop_down</md-icon>
+        <button mat-button [matMenuTriggerFor]="menu">
+          <mat-icon>person</mat-icon>{{username}}<mat-icon>arrow_drop_down</mat-icon>
         </button>
-        <md-menu #menu="mdMenu">
-          <button md-menu-item (click)="logout()">
-            <md-icon>exit_to_app</md-icon>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="logout()">
+            <mat-icon>exit_to_app</mat-icon>
             <span i18n="action | user will click this to log out of the website@@LogoutAction">Logout</span>
           </button>
-        </md-menu>
+        </mat-menu>
       </span>
     </span>
   </div>
@@ -52,15 +52,15 @@
     {{title}}
   </h1>
   <div style="float:right" >
-    <button md-button [mdMenuTriggerFor]="menu">
-        {{username}}<md-icon>arrow_drop_down</md-icon>
+    <button mat-button [matMenuTriggerFor]="menu">
+        {{username}}<mat-icon>arrow_drop_down</mat-icon>
       </button>
-      <md-menu #menu="mdMenu">
-        <button md-menu-item (click)="logout()">
-          <md-icon>exit_to_app</md-icon>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>exit_to_app</mat-icon>
           <span i18n="action | user will click this to log out of the website@@LogoutAction">Logout</span>
         </button>
-      </md-menu>
+      </mat-menu>
   </div>
 
 

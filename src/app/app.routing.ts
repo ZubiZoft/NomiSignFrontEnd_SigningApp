@@ -5,10 +5,12 @@ import { DocumentsComponent } from './components/documents/documents.component'
 import { DocumentDetailComponent } from './components/documentDetail/documentDetail.component'
 import { NotFoundComponent } from './components/notfound/notfound.component'
 import { LoginComponent } from './components/login/login.component'
+import { AccountComponent } from './components/account/account.component'
 import { AuthGuard } from './services/authguard.service'
 import { User } from './models/user.model'
 
 const routes: Routes = [
+    { path: 'account/:uid', component: AccountComponent },
     { path: '', redirectTo: '/login', pathMatch: 'full' },
     { path: 'login', component: LoginComponent },
     { path: 'documents', component: DocumentsComponent, data : User, canActivate: [AuthGuard] },

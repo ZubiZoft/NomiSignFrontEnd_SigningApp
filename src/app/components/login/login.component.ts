@@ -6,7 +6,7 @@ import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user.model'
 
-import {MdDialog, MdDialogRef, MD_DIALOG_DATA} from '@angular/material';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 @Component({
   selector: 'app-login',
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
     Validators.required]);
 
 
-  constructor(private authService: AuthService, private router: Router, private userService: UserService, public dialog: MdDialog) {
+  constructor(private authService: AuthService, private router: Router, private userService: UserService, public dialog: MatDialog) {
 
   }
 
@@ -66,7 +66,7 @@ export class LoginComponent implements OnInit {
 })
 export class LoginAlertDialog {
 
-  constructor(public dialogRef: MdDialogRef<LoginAlertDialog>) { }
+  constructor(public dialogRef: MatDialogRef<LoginAlertDialog>) { }
 
   onNoClick(): void {
     this.dialogRef.close();
