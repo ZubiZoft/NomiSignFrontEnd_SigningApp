@@ -18,6 +18,7 @@ import { NotFoundComponent } from './components/notfound/notfound.component'
 import { LoginComponent } from './components/login/login.component'
 import { AccountComponent } from './components/account/account.component'
 import { LoginAlertDialog } from './components/login/login.component'
+import { PasswordAlertDialog } from './components/account/account.component'
 import { AuthService } from './services/auth.service'
 import { DocumentService } from './services/documents.service'
 import { UserService } from './services/user.service'
@@ -33,7 +34,8 @@ import { AuthGuard } from './services/authguard.service'
     LoginComponent,
     DocumentSignedNoticeComponent,
     DocumentRejectNoticeComponent,
-    LoginAlertDialog
+    LoginAlertDialog,
+    PasswordAlertDialog 
   ],
   imports: [
     BrowserModule,
@@ -56,6 +58,6 @@ import { AuthGuard } from './services/authguard.service'
   ],
   providers: [ AuthService, DocumentService, UserService, AuthGuard ],
   bootstrap: [AppComponent],
-  entryComponents: [ DocumentSignedNoticeComponent, DocumentRejectNoticeComponent, LoginAlertDialog ],
+  entryComponents: [ DocumentSignedNoticeComponent, DocumentRejectNoticeComponent, LoginAlertDialog, PasswordAlertDialog ],
 })
 export class AppModule { }

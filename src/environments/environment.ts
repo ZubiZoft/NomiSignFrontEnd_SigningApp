@@ -5,5 +5,5 @@
 
 export const environment = {
     production: false,
-    serviceUrl: "http://ogrean.com/nomisign/"
+    serviceUrl: "http://localhost/nomisign/"
 };

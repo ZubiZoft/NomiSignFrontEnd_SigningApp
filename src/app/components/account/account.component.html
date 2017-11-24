@@ -1,42 +1,45 @@
-﻿<div style="overflow-y: auto">
+﻿<!--<mat-spinner style="margin:0 auto;" *ngIf="!isPromiseDone"></mat-spinner>-->
+<div style="overflow-y: auto">
     <div>
-        <mat-card style="margin: auto; width: 80%; text-align: center; float:none" class="loginFormMobile">
+        <mat-card style="margin: auto; width: 60%; text-align: center; float:none" class="loginFormMobile">
             <h1 style="text-align:center">
                 <h2 i18n="header | header for where the user will enter their login credentials @@LoginFormHeader">Change Password</h2>
             </h1>
 
             <mat-card-content>
-                <form name="loginForm" class="example-form">
-                    <div>
-                        <span i18n="header | asking for the user's email@@PasswordLoginForm" style="display:inline-block; width:12%;text-align:left" class="loginFormFieldsMobile">Email &nbsp;</span>
-                        <mat-form-field class="example-full-width">
-                            <input type="text" matInput  /> <!-- [(ngModel)]=userName> [(ngModel)]="password" [formControl]="usernameFormControl"-->
-                            <!--<mat-error *ngIf="usernameFormControl.hasError('required')" i18n="message | letting the user know that they need to enter their username@@UsernameRequiredMessage">
-                                Username is <strong>required</strong>
-                            </mat-error>-->
-                        </mat-form-field>
-                    </div>
-                    <div>
-                        <span i18n="header | asking for the user's password@@PasswordLoginForm" style="display:inline-block; width:12%; text-align:left" class="loginFormFieldsMobile">Password &nbsp;</span>
-                        <mat-form-field class="example-full-width">
-                            <input type="password" matInput >
-                            <!--<mat-error *ngIf="passwordFormControl.hasError('required')" i18n="message | letting the user know that they need to enter their password@@PasswordRequiredMessage">
-                                Password is <strong>required</strong>
-                            </mat-error>-->
-                        </mat-form-field>
+                <div style="max-height: 100vh; overflow-y: auto" class="centeredList" *ngIf="employee">
 
-                    </div>
-                    <div>
-                        <span i18n="header | asking for the user's password@@PasswordLoginForm" style="display:inline-block; width:12%; text-align:left" class="loginFormFieldsMobile">Verify Password &nbsp;</span>
-                        <mat-form-field class="example-full-width">
-                            <input type="password" matInput >
-                            <!--<mat-error *ngIf="passwordFormControl.hasError('required')" i18n="message | letting the user know that they need to enter their password@@PasswordRequiredMessage">
-                                Password is <strong>required</strong>
-                            </mat-error>-->
-                        </mat-form-field>
+                    <form  class="example-form">
+                        <!--<mat-form-field class="example-full-width">
+                            <input required matInput placeholder="Email Address" [formControl]="usernameFormControl" [(ngModel)]="employeePasswordDetails.EmailAddress" name=employeeEmailAddress
+                                   i18n-placeholder="@@EmployeeEmailField" />
+                            <mat-error *ngIf="usernameFormControl.hasError('required')" i18n="message | letting the user know that they need to enter their username@@UsernameRequiredMessage">
+                                Email address is <strong>required</strong>
+                            </mat-error>
+                            <mat-error *ngIf="usernameFormControl.hasError('email')" i18n="message | letting the user know that they need to enter their username@@UsernameRequiredMessage">
+                                Email is <strong>not valid</strong>
+                            </mat-error>
+                        </mat-form-field>-->
+                            <mat-form-field class="example-full-width">
+                                <input type="password" required matInput placeholder="Password" [formControl]="passwordFormControl" [(ngModel)]="employeePasswordDetails.PasswordHash" name=employeePasswordHash
+                                       i18n-placeholder="@@EmployeePasswordHashField" />
+                                <mat-error *ngIf="passwordFormControl.hasError('required')" i18n="message | letting the user know that they need to enter their password@@PasswordRequiredMessage">
+                                    Password is <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
 
-                    </div>
-                </form>
+                            <mat-form-field class="example-full-width">
+                                <input type="password" required matInput [formControl]="passwordVerifyFormControl" pattern="{{employeePasswordDetails.PasswordHash}}" placeholder="Verify Password" name=employeeVerifyPasswordHash
+                                       i18n-placeholder="@@EmployeeVerifypasswordHashField" />
+                                <mat-error *ngIf="passwordVerifyFormControl.hasError('required')" i18n="message | letting the user know that they need to enter their password@@PasswordRequiredMessage">
+                                    Verify Password is <strong>required</strong>
+                                </mat-error>
+                                <mat-error *ngIf="passwordVerifyFormControl.hasError('pattern')" i18n="message | letting the user know that they need to enter matching password@@PasswordMatchingRequiredMessage">
+                                    Verify Passwords <strong>match!</strong> 
+                                </mat-error>
+                        </mat-form-field>
+                    </form>
+                  </div> 
             </mat-card-content>
             <button mat-raised-button color="primary" style="width:40%" (click)=reroute() i18n="action | user will click this to login to thet website@@LoginButtonAction"> Update </button>
         </mat-card>
