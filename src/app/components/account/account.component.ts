@@ -53,6 +53,8 @@ export class AccountComponent implements OnInit {
         // will need phone later maybe  this.employeePasswordDetails.EmailAddress === this.employee.EmailAddress &&
         if ( (!this.passwordVerifyFormControl.hasError('pattern')) ) {
             this.employee.PasswordHash = this.employeePasswordDetails.PasswordHash;
+            // set user to active
+            this.employee.EmployeeStatus = 2;
             this.updateUserPassword();
             this.router.navigate(['/login']);
         }

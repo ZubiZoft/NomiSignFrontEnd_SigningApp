@@ -10,5 +10,6 @@ export class EmployeeModel {
     LastPasswordChangeDate:Date;
     RFC: string;
     CURP: string;
-    CellPhoneNumber: string;  
+    CellPhoneNumber: string; 
+    EmployeeStatus: number;
 }

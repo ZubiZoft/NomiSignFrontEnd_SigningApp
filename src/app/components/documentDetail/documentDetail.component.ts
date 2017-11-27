@@ -34,8 +34,8 @@ export class DocumentDetailComponent implements OnInit {
         this.user = this.userService.getUser()
         this.route.paramMap
         .switchMap((params: ParamMap) => this.documentService.getUserDocumentData(this.user.EmployeeId ,params.get('id')))
-        .subscribe(data => this.document = data);   
-        this.isPromiseDone = true; 
+            .subscribe(data => { this.document = data; this.isPromiseDone = true; });   
+        //this.isPromiseDone = true; 
     }
 
     signDocument(){
@@ -49,7 +49,7 @@ export class DocumentDetailComponent implements OnInit {
     }
 
     scrubImage(){
-        this.sanitizer.bypassSecurityTrustUrl('data:image/jpg;base64,' + this.document.DocumentBytes)
+        this.sanitizer.bypassSecurityTrustUrl('data:image/png;base64,' + this.document.DocumentBytes)
     }
 
     openDocumentNotice(docSignStatus){
