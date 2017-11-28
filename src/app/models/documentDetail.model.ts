@@ -4,6 +4,7 @@ export class DocumentDetail {
     UploadTime: string;
     PayperiodDate: string;
     SignStatus: number;
+    SignStatusText: string;
     DocumentBytes: string;
     BatchId: number;
     Links: {

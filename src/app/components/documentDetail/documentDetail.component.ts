@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Location } from '@angular/common';
 //angular material imports
 import { MatSnackBar } from '@angular/material'
 //rxjs imports
@@ -24,9 +25,10 @@ export class DocumentDetailComponent implements OnInit {
     isPromiseDone: boolean = false
     user: User
     document: DocumentDetail
+    isUnsigned: boolean = false;
 
     constructor(private documentService: DocumentService, private userService: UserService, private route: ActivatedRoute,
-                private sanitizer: DomSanitizer, public snackBar: MatSnackBar) {
+        private sanitizer: DomSanitizer, public snackBar: MatSnackBar, private _location: Location) {
 
     }
 
@@ -34,18 +36,24 @@ export class DocumentDetailComponent implements OnInit {
         this.user = this.userService.getUser()
         this.route.paramMap
         .switchMap((params: ParamMap) => this.documentService.getUserDocumentData(this.user.EmployeeId ,params.get('id')))
-            .subscribe(data => { this.document = data; this.isPromiseDone = true; });   
+            .subscribe(data => { this.document = data; this.isPromiseDone = true; this.isUnsigned = (this.document.SignStatus === 1) });   
         //this.isPromiseDone = true; 
     }
 
     signDocument(){
         this.document.SignStatus = 2;
-        this.documentService.updateDocument(this.user.EmployeeId, this.document).subscribe(data => this.openDocumentNotice(this.document.SignStatus));
+        this.documentService.updateDocument(this.user.EmployeeId, this.document).subscribe( 
+            data => { this.openDocumentNotice(this.document.SignStatus);
+                this._location.back();
+        });
     }
 
     refuseDocument(){
         this.document.SignStatus = 3;
-        this.documentService.updateDocument(this.user.EmployeeId, this.document).subscribe(data => this.openDocumentNotice(this.document.SignStatus));
+        this.documentService.updateDocument(this.user.EmployeeId, this.document).subscribe(data => {
+            this.openDocumentNotice(this.document.SignStatus);
+            this._location.back();
+        });
     }
 
     scrubImage(){
