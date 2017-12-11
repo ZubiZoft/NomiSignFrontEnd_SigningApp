@@ -12,8 +12,10 @@ import 'rxjs/add/operator/filter'
   providers: [ SettingsService ]
 })
 export class AppComponent {
-  title : string
-  username : string
+    title: string;
+    username: string;
+    displayName: string;
+    userId: number;
   
   constructor(private userService: UserService, private settingsService : SettingsService, private router: Router, private activatedRoute: ActivatedRoute){
     settingsService.getSystemSettings().subscribe(data => this.title = data[0].ProductName)
@@ -24,9 +26,12 @@ export class AppComponent {
   }
 
   getCurrentUser(){
-    let user = this.userService.getUser()
-    if (user){
-      this.username = user.EmailAddress;
+      let user = this.userService.getUser()
+     
+      if (user) {
+          this.userId = user.EmployeeId;
+          this.displayName = user.FirstName + ' ' + user.LastName1;
+          this.username = user.CellPhoneNumber;
     }     
   }
 

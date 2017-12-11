@@ -23,6 +23,9 @@ import { AuthService } from './services/auth.service'
 import { DocumentService } from './services/documents.service'
 import { UserService } from './services/user.service'
 import { AuthGuard } from './services/authguard.service'
+import { ChangePasswordComponent } from './components/changepassword/changepassword.component' 
+import { ChangePhoneComponent } from './components/changephone/changephone.component' 
+import { EmployeeSecurityQuestionsComponent } from './components/securityquestions/securityquestions.component' 
 
 @NgModule({
   declarations: [
@@ -35,7 +38,10 @@ import { AuthGuard } from './services/authguard.service'
     DocumentSignedNoticeComponent,
     DocumentRejectNoticeComponent,
     LoginAlertDialog,
-    PasswordAlertDialog 
+    PasswordAlertDialog,
+    ChangePasswordComponent,
+      ChangePhoneComponent,
+      EmployeeSecurityQuestionsComponent
   ],
   imports: [
     BrowserModule,

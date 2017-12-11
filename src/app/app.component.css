@@ -8,15 +8,18 @@
 
   .mobileHeaderLogo {
    max-height: 32px !important;
-   left: 5% !important
+   left: 5% !important;
+   align-content: center
   }
 
   .mobileHeaderTitle{
     text-align: right !important;
     font-size: small !important;
+    align-content: center;
   }
   .mobileHeaderText{
     line-height: 30px !important;
+    align-content: center;
   }
     
  }

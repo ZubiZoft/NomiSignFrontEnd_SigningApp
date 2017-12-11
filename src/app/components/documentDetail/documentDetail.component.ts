@@ -40,7 +40,8 @@ export class DocumentDetailComponent implements OnInit {
         //this.isPromiseDone = true; 
     }
 
-    signDocument(){
+    signDocument() {
+        //alert('do reason here');
         this.document.SignStatus = 2;
         this.documentService.updateDocument(this.user.EmployeeId, this.document).subscribe( 
             data => { this.openDocumentNotice(this.document.SignStatus);
@@ -48,7 +49,9 @@ export class DocumentDetailComponent implements OnInit {
         });
     }
 
-    refuseDocument(){
+    refuseDocument() {
+        var reason = prompt("Please enter your refused reason", "");
+        this.document.EmployeeConcern = reason;
         this.document.SignStatus = 3;
         this.documentService.updateDocument(this.user.EmployeeId, this.document).subscribe(data => {
             this.openDocumentNotice(this.document.SignStatus);

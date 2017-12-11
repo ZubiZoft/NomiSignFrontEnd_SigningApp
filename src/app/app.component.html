@@ -1,7 +1,6 @@
 <div style="text-align:center" class="mobileHeaderTitle" *ngIf="username">
-  <img style="max-height:60px; position:absolute;left:12%" src="../assets/images/Nomi_Sign-12-1-1.png" class="mobileHeaderLogo"
-  />
-  <h1 style="line-height:50px" class="mobileHeaderText"> Employee Page</h1>
+    <img style="max-height:60px; position:sticky;left:12%" src="../assets/images/Nomi_Sign-12-1-1.png" class="mobileHeaderLogo" />
+  <h2 style="line-height:50px" class="mobileHeaderText">Aplicacion del Empleado</h2>
 </div>
 
 <h1 class="toolbar" *ngIf="username">
@@ -12,15 +11,30 @@
             <mat-menu #mobileMenu="matMenu">
               <button mat-menu-item routerLink="/documents" routerLinkActive="active" i18n="@@GoHomePageMenuHeader"> Home </button>
             </mat-menu>
+            <!--<span style="align-content: center">Aplicacion del Empleado</span>-->
             <span style="float:right" *ngIf="username">
               <button mat-button [matMenuTriggerFor]="menu">
-                <mat-icon>person</mat-icon>{{username}}<mat-icon>arrow_drop_down</mat-icon>
+                <mat-icon>person</mat-icon>{{displayName}}<mat-icon>arrow_drop_down</mat-icon>
               </button>
               <mat-menu #menu="matMenu">
                 <button mat-menu-item (click)="logout()">
                   <mat-icon>exit_to_app</mat-icon>
-                  <span i18n="action | user will click this to log out of the website@@LogoutAction">Logout</span>
+                  <span i18n="action | user will click this to log out of the website@@LogoutAction">Cerrar sesion</span>
                 </button>
+
+                  <button mat-menu-item [routerLink]="['/securityquestions', userId]" routerLinkActive="active">
+                      <mat-icon>exit_to_app</mat-icon>
+                      <span i18n="action | user will click this to log out of the website@@LogoutAction">Preguntas de seguridad</span>
+                  </button>
+
+                  <button mat-menu-item [routerLink]="['/changepassword', userId]" routerLinkActive="active">
+                      <mat-icon>exit_to_app</mat-icon>
+                      <span i18n="action | user will click this to log out of the website@@LogoutAction">Cambia la contrasena</span>
+                  </button>
+                  <button mat-menu-item [routerLink]="['/changephone', userId]" routerLinkActive="active">
+                      <mat-icon>exit_to_app</mat-icon>
+                      <span i18n="action | user will click this to log out of the website@@LogoutAction">Cambia tu telefono</span>
+                  </button>
               </mat-menu>
              </span>
   </span>
@@ -32,38 +46,35 @@
           Home 
         </span>
       </button>
-
+        <!--<span style="align-content: center">Aplicacion del Empleado</span>-->
       <span style="float:right" *ngIf="username">
         <button mat-button [matMenuTriggerFor]="menu">
-          <mat-icon>person</mat-icon>{{username}}<mat-icon>arrow_drop_down</mat-icon>
+          <mat-icon>person</mat-icon>{{displayName}}<mat-icon>arrow_drop_down</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
           <button mat-menu-item (click)="logout()">
             <mat-icon>exit_to_app</mat-icon>
-            <span i18n="action | user will click this to log out of the website@@LogoutAction">Logout</span>
+            <span i18n="action | user will click this to log out of the website@@LogoutAction">Cerrar sesion</span>
           </button>
+
+            <button mat-menu-item [routerLink]="['/securityquestions', userId]" routerLinkActive="active">
+                <mat-icon>exit_to_app</mat-icon>
+                <span i18n="action | user will click this to log out of the website@@LogoutAction">Preguntas de seguridad</span>
+            </button>
+
+            <button mat-menu-item [routerLink]="['/changepassword', userId]" routerLinkActive="active">
+                <mat-icon>exit_to_app</mat-icon>
+                <span i18n="action | user will click this to log out of the website@@LogoutAction">Cambia la contrasena</span>
+            </button>
+            <button mat-menu-item [routerLink]="['/changephone', userId]" routerLinkActive="active">
+                <mat-icon>exit_to_app</mat-icon>
+                <span i18n="action | user will click this to log out of the website@@LogoutAction">Cambia tu telefono</span>
+            </button>
         </mat-menu>
       </span>
     </span>
   </div>
 </h1>
-<!-- <div style="text-align:center" *ngIf="username">
-  <h1 style="float: left">
-    {{title}}
-  </h1>
-  <div style="float:right" >
-    <button mat-button [matMenuTriggerFor]="menu">
-        {{username}}<mat-icon>arrow_drop_down</mat-icon>
-      </button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="logout()">
-          <mat-icon>exit_to_app</mat-icon>
-          <span i18n="action | user will click this to log out of the website@@LogoutAction">Logout</span>
-        </button>
-      </mat-menu>
-  </div>
 
-
-</div> -->
 <div style="clear:both"></div>
 <router-outlet></router-outlet>

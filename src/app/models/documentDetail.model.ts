@@ -6,6 +6,7 @@ export class DocumentDetail {
     SignStatus: number;
     SignStatusText: string;
     DocumentBytes: string;
+    EmployeeConcern: string; 
     BatchId: number;
     Links: {
         SelfUri: string;

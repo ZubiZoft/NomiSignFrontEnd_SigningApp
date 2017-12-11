@@ -52,7 +52,7 @@ export class DocumentsComponent implements OnInit {
         this.documentService.getDocumentsForUser(this.user.EmployeeId).subscribe(data => {
             data.forEach(doc => {
                 console.log(doc.SignStatus)
-                if (doc.SignStatus === 'Unsigned'){
+                if (doc.SignStatus === 'Sin Firma'){
                     this.docsWithSignStatus1Exist = true;
                 }
             }); 

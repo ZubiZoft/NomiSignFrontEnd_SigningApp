@@ -8,6 +8,7 @@ export class User {
     CURP: string;
     RFC: string;
     CreatedByUserId: number;
+    CellPhoneNumber: string;
     PasswordHash: string;
     EmailAddress: string;
     Links: {
