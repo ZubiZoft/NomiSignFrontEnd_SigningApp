@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
   };
   userName: string
   password: string
+  isPromiseDone: boolean = true;
 
   activeUser: User;
   usernameFormControl = new FormControl('', [
@@ -74,6 +75,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+      this.isPromiseDone = false;
     this.user.CellPhoneNumber = this.userName
     this.user.PasswordHash = this.password
     this.authService.loginUser(this.user).subscribe(

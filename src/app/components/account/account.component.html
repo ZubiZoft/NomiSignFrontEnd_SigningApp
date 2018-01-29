@@ -1,7 +1,7 @@
 ﻿<!--<mat-spinner style="margin:0 auto;" *ngIf="!isPromiseDone"></mat-spinner>-->
 <div style="overflow-y: auto">
     <div>
-        <mat-card style="margin: auto; width: 60%; text-align: center; float:none" class="loginFormMobile">
+        <mat-card *ngIf="employee.EmployeeStatus != 2" style="margin: auto; width: 60%; text-align: center; float:none" class="loginFormMobile">
             <h1 style="text-align:center">
                 <h2 i18n="header | header for where the user will enter their login credentials @@LoginFormHeader">Cambia la Contraseña</h2>
             </h1>
@@ -10,6 +10,14 @@
                 <div style="max-height: 100vh; overflow-y: auto" class="centeredList" *ngIf="employee">
 
                     <form  class="example-form">
+                        <mat-form-field class="example-full-width">
+                            <input type="password" required matInput placeholder="Codigo de seguridad" [formControl]="securityCodeFormControl" [(ngModel)]="employeePasswordDetails.SecurityCode" name=securityCode
+                                   i18n-placeholder="@@EmployeePasswordHashField" />
+                            <mat-error *ngIf="securityCodeFormControl.hasError('required')" i18n="message | letting the user know that they need to enter their password@@PasswordRequiredMessage">
+                                Codigo de seguridad <strong>Requerida</strong>
+                            </mat-error>
+                        </mat-form-field>
+
                             <mat-form-field class="example-full-width">
                                 <input type="password" required matInput placeholder="Contraseña" [formControl]="passwordFormControl" [(ngModel)]="employeePasswordDetails.PasswordHash" name=employeePasswordHash
                                        i18n-placeholder="@@EmployeePasswordHashField" />
@@ -33,5 +41,6 @@
             </mat-card-content>
             <button mat-raised-button color="primary" style="width:40%" (click)=reroute() i18n="action | user will click this to login to thet website@@LoginButtonAction"> Update </button>
         </mat-card>
+        <h4 *ngIf="employee.EmployeeStatus == 2" style="text-align: center" i18n="message | a message to let the user know there are no documents to view@@DocumentSignStatusHeader"> Invalid page, please request a pasword reset </h4>
     </div>
 </div>

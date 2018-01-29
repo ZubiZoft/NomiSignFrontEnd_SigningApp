@@ -5,6 +5,7 @@ export class User {
     FirstName: string;
     LastName1: string;
     LastName2: string;
+    FullName: string;
     CURP: string;
     RFC: string;
     CreatedByUserId: number;

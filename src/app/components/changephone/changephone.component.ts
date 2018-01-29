@@ -68,11 +68,6 @@ export class ChangePhoneComponent implements OnInit {
       
   }
 
-  //passwordMatch(c: AbstractControl) {
-  //    return c.get('employeePasswordHash').value === c.get('employeeVerifyPasswordHash').value ? null : { 'nomatch': true };
-  //}
-
-
   updateUserPhone() {
       this.route.paramMap
           .switchMap((params: ParamMap) => this.employeeService.updateEmployeeDetails(this.employee.EmployeeId, this.employee).finally(() => this.snackbar.open("sucessfully updated", "", { duration: 5000 })))

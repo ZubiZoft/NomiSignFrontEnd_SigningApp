@@ -30,4 +30,13 @@ export class EmployeeService {
         return this.http.put(url, body, options).map(response => response.json());
     }
 
+    //PUT
+    updateEmployeePassword(employeeId: string, employee: EmployeeModel): Observable<any> {
+        var _headers = new Headers({ 'Content-Type': 'application/json' })
+        var options = new RequestOptions({ method: 'PUT', headers: _headers })
+        var body = JSON.stringify(employee);
+        var url = rootURL + 'api/employees/password/' + employeeId
+        return this.http.put(url, body, options).map(response => response.json());
+    }
+
 }

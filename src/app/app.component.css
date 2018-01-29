@@ -13,7 +13,7 @@
   }
 
   .mobileHeaderTitle{
-    text-align: right !important;
+    /*text-align: right !important;*/
     font-size: small !important;
     align-content: center;
   }

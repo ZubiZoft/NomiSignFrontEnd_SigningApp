@@ -49,8 +49,6 @@ export class ChangePasswordComponent implements OnInit {
           });
   }
 
-    
-
     reroute(activeUser) {
        
         // will need phone later maybe  this.employeePasswordDetails.EmailAddress === this.employee.EmailAddress &&
@@ -67,17 +65,11 @@ export class ChangePasswordComponent implements OnInit {
                 data: {}
             }); 
         }
-      
   }
-
-  //passwordMatch(c: AbstractControl) {
-  //    return c.get('employeePasswordHash').value === c.get('employeeVerifyPasswordHash').value ? null : { 'nomatch': true };
-  //}
-
 
   updateUserPassword() {
       this.route.paramMap
-          .switchMap((params: ParamMap) => this.employeeService.updateEmployeeDetails(this.employee.EmployeeId, this.employee).finally(() => this.snackbar.open("sucessfully updated", "", { duration: 5000 })))
+          .switchMap((params: ParamMap) => this.employeeService.updateEmployeePassword(this.employee.EmployeeId, this.employee).finally(() => this.snackbar.open("sucessfully updated", "", { duration: 5000 })))
           .subscribe(data => this.employee = data,
           error => this.snackbar.open(error, "", { duration: 5000 }))
   }

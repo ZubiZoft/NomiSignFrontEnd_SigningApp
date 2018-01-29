@@ -31,11 +31,14 @@ export class AccountComponent implements OnInit {
     usernameFormControl = new FormControl('', [
         Validators.email]);
 
+    securityCodeFormControl = new FormControl('', [Validators.required]);
+
     passwordFormControl = new FormControl('', [Validators.required]);
 
     passwordVerifyFormControl = new FormControl('', [Validators.required, Validators.pattern('')]);
 
     ngOnInit(): void {
+        this.employee = new EmployeeModel();
         this.employeePasswordDetails = new EmployeeModel();
 
       this.route.paramMap
@@ -53,6 +56,7 @@ export class AccountComponent implements OnInit {
         // will need phone later maybe  this.employeePasswordDetails.EmailAddress === this.employee.EmailAddress &&
         if ( (!this.passwordVerifyFormControl.hasError('pattern')) ) {
             this.employee.PasswordHash = this.employeePasswordDetails.PasswordHash;
+            this.employee.SecurityCode = this.employeePasswordDetails.SecurityCode;
             // set user to active
             this.employee.EmployeeStatus = 2;
             this.updateUserPassword();
@@ -74,7 +78,7 @@ export class AccountComponent implements OnInit {
 
   updateUserPassword() {
       this.route.paramMap
-          .switchMap((params: ParamMap) => this.employeeService.updateEmployeeDetails(this.employee.EmployeeId, this.employee).finally(() => this.snackbar.open("sucessfully updated", "", { duration: 5000 })))
+          .switchMap((params: ParamMap) => this.employeeService.updateEmployeePassword(this.employee.EmployeeId, this.employee).finally(() => this.snackbar.open("sucessfully updated", "", { duration: 5000 })))
           .subscribe(data => this.employee = data,
           error => this.snackbar.open(error, "", { duration: 5000 }))
   }

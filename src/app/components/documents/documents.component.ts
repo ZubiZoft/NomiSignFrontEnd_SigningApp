@@ -8,6 +8,7 @@ import { User } from '../../models/user.model'
 import { Document } from '../../models/document.model'
 
 import { Sort } from '@angular/material';
+//import { MatTableDataSource } from '@angular/material';
 
 @Component({
     selector: 'app-documents',
@@ -37,6 +38,7 @@ export class DocumentsComponent implements OnInit {
             let isAsc = sort.direction == 'asc';
             switch (sort.active) {
                 case 'SignStatus': return this.compare(+a.SignStatus, +b.SignStatus, isAsc);
+                case 'PayAmount': return this.compare(+a.PayAmount, +b.PayAmount, isAsc);
                 case 'DocumentId': return this.compare(+a.DocumentId, +b.DocumentId, isAsc);
                 default: return 0;
             }

@@ -1,7 +1,8 @@
-<div style="text-align:center" class="mobileHeaderTitle" *ngIf="username">
-    <img style="max-height:60px; position:sticky;left:12%" src="../assets/images/Nomi_Sign-12-1-1.png" class="mobileHeaderLogo" />
+<div style="width: 100%; text-align: center; align-content: center" class="mobileHeaderTitle"  *ngIf="username">
+    <img style="max-height:60px; position:center"  src="../assets/images/Nomi_Sign-12-1-1.png" class="mobileHeaderLogo" />
   <h2 style="line-height:50px" class="mobileHeaderText">Aplicacion del Empleado</h2>
 </div>
+<!--<div style="width: 100%; text-align: center; align-content: center"><h2>Aplicacion del Empleado</h2></div>-->
 
 <h1 class="toolbar" *ngIf="username">
 
@@ -12,9 +13,9 @@
               <button mat-menu-item routerLink="/documents" routerLinkActive="active" i18n="@@GoHomePageMenuHeader"> Home </button>
             </mat-menu>
             <!--<span style="align-content: center">Aplicacion del Empleado</span>-->
-            <span style="float:right" *ngIf="username">
+            <span title="{{displayName}}" style="float:right" *ngIf="username">
               <button mat-button [matMenuTriggerFor]="menu">
-                <mat-icon>person</mat-icon>{{displayName}}<mat-icon>arrow_drop_down</mat-icon>
+                <mat-icon>person</mat-icon>{{displayNameMobile}}<mat-icon>arrow_drop_down</mat-icon>
               </button>
               <mat-menu #menu="matMenu">
                 <button mat-menu-item (click)="logout()">
@@ -47,7 +48,7 @@
         </span>
       </button>
         <!--<span style="align-content: center">Aplicacion del Empleado</span>-->
-      <span style="float:right" *ngIf="username">
+      <span title="{{displayName}}" style="float:right" *ngIf="username">
         <button mat-button [matMenuTriggerFor]="menu">
           <mat-icon>person</mat-icon>{{displayName}}<mat-icon>arrow_drop_down</mat-icon>
         </button>

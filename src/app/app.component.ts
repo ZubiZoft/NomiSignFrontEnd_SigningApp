@@ -15,6 +15,7 @@ export class AppComponent {
     title: string;
     username: string;
     displayName: string;
+    displayNameMobile: string;
     userId: number;
   
   constructor(private userService: UserService, private settingsService : SettingsService, private router: Router, private activatedRoute: ActivatedRoute){
@@ -28,11 +29,19 @@ export class AppComponent {
   getCurrentUser(){
       let user = this.userService.getUser()
      
-      if (user) {
-          this.userId = user.EmployeeId;
-          this.displayName = user.FirstName + ' ' + user.LastName1;
+      if (user)
+      {
+          this.userId = user.EmployeeId; 
+          this.displayName = user.FullName;
           this.username = user.CellPhoneNumber;
-    }     
+          this.displayNameMobile = user.FullName;
+          if (user.FullName) // must check this
+          {
+              if (user.FullName.length > 20) {
+                  this.displayNameMobile = user.FullName.substr(0, 20) + "...";
+              }
+          }
+      }     
   }
 
   logout(){

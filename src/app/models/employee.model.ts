@@ -12,4 +12,5 @@ export class EmployeeModel {
     CURP: string;
     CellPhoneNumber: string; 
     EmployeeStatus: number;
+    SecurityCode: string;
 }
