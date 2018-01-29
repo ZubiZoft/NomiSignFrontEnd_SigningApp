@@ -28,7 +28,7 @@ export class UserService {
 
     public clearUser(){
         sessionStorage.clear()
-        this._user= new User();
+        this._user = new User();
         this.userUpdated.emit()
     }
 
