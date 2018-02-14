@@ -1,15 +1,37 @@
+.mobileTableDisplay {
+  overflow-y: auto;
+  position: absolute;
+  top: 300px;
+  bottom: 15px;
+  left: 10%;
+  right: 10%;
+}
+
 @media (max-device-width: 720px) {
-    .mobileHeader{
-        float: left;
-        margin-left:5px;
-    }
+  .mobileHeader {
+    float: left;
+    margin-left: 5px;
+  }
 
-    .mobileCheckbox{
-        width:90% !important;
-    }
+  .mobileCheckbox {
+    width: 90% !important;
+  }
 
-    .mobileTableDisplay{
-        width: 100% !important;
-    }
-      
-   }
+  .mobileTableDisplay {
+    width: 100% !important;
+  }
+
+  h2 {
+    font-size: 1rem !important;
+  }
+
+  .mobileTableDisplay {
+    overflow-y: auto;
+    position: absolute;
+    top: 300px;
+    bottom: 15px;
+    width: 95% !important;
+    left: 10px;
+    right: 10px;
+  }
+}

@@ -45,12 +45,12 @@ export class ChangePasswordComponent implements OnInit {
           .switchMap((params: ParamMap) => this.employeeService.getEmployeeById(params.get('uid')))
           .subscribe(data => {
               this.employee = data;
-              this.isPromiseDone = true; 
+              this.isPromiseDone = true;
           });
   }
 
     reroute(activeUser) {
-       
+
         // will need phone later maybe  this.employeePasswordDetails.EmailAddress === this.employee.EmailAddress &&
         if ( (!this.passwordVerifyFormControl.hasError('pattern')) ) {
             this.employee.PasswordHash = this.employeePasswordDetails.PasswordHash;
@@ -63,13 +63,14 @@ export class ChangePasswordComponent implements OnInit {
             let dialogRef = this.dialog.open(PasswordAlertDialog, {
                 width: '50%',
                 data: {}
-            }); 
+            });
         }
   }
 
   updateUserPassword() {
       this.route.paramMap
-          .switchMap((params: ParamMap) => this.employeeService.updateEmployeePassword(this.employee.EmployeeId, this.employee).finally(() => this.snackbar.open("sucessfully updated", "", { duration: 5000 })))
+          .switchMap((params: ParamMap) => this.employeeService.updateEmployeePassword(this.employee.EmployeeId, this.employee).finally(
+            () => this.snackbar.open("sucessfully updated", "", { duration: 5000 })))
           .subscribe(data => this.employee = data,
           error => this.snackbar.open(error, "", { duration: 5000 }))
   }

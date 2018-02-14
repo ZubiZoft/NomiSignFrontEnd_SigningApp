@@ -7,22 +7,36 @@
   width: 50%;
 }
 
+.loginLogoMobile {
+  margin-right: 5%;
+  margin-left: 5%;
+}
+
 @media (max-device-width: 720px) {
   .loginLogoMobile {
-     float: unset !important;
+    float: unset !important;
+
   }
   .loginTitleMobile {
     width:90% !important;
     margin: 5%;
+    margin-left:0 !important;
+    transform:translateY(0) !important;
   }
 
   .loginFormMobile {
     float: unset !important;
-    width: 75%!important
+    width: 85%!important;
+    margin: 5px;
+
   }
 
   .loginFormFieldsMobile {
     width: 30% !important;
   }
-    
- }
+
+  .loginContainerMobile {
+    top: 10% !important;
+  }
+
+}

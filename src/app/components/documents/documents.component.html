@@ -1,60 +1,59 @@
-<!--<mat-spinner style="margin:0 auto;" *ngIf="!isPromiseDone"></mat-spinner>
-<h2 style="text-align:center; margin: 0 auto" i18n="title | title for a list of documents@@DocumentTitle" class="mobileHeader">Documentos</h2>
-<div style="width: 75%; margin: 0 auto; text-align: end" class="mobileCheckbox">
-    <mat-checkbox [(ngModel)]="showAll" color="primary" i18n="question | ask to show all documents in list@@ShowAllDocChkBox">Todos los Documentos?</mat-checkbox>
-</div>
- <div *ngIf="(docsWithSignStatus1Exist || showAll)"  style="width: 75%; margin:auto;" class="mobileTableDisplay">
-     <mat-list matSort (matSortChange)="sortDocuments($event)">
-
-                     <h3 mat-sort-header="DocumentId" style="float:left; padding-left:50px" i18n="title | the id of the document@@DocumentIdTitle">Identificacion</h3>
-
-                     <h3 mat-sort-header="PayAmount" style="float:left; padding-left:200px" i18n="title | the id of the document@@DocumentIdTitle">Monto</h3>
-
-                     <h3 mat-sort-header="SignStatus" style="float:right; padding-left:50px" i18n="title | the sign status of the document@@DocumentSignStatusTitle">Estado</h3>
-
-         <div style="clear:both"></div>
-         <div style="max-height:75vh; overflow-y:auto">
-             <ng-container *ngFor="let doc of sortedDocument">
-                 
-                 <mat-list-item *ngIf="showAll || doc.SignStatus === 'Sin Firma'" style="border-bottom: 1px solid grey" [routerLink]="['/documents', doc.DocumentId]" routerLinkActive="active">
-                     <mat-icon mat-list-icon>insert_drive_file</mat-icon>
-
-                                 <h4 mat-line i18n="header | the id of the document in the list@@DocumentIdHeader">Numero: {{doc.DocumentId}}</h4>
-
-                                 <p *ngIf="doc.AlwaysShow == 0" mat-line i18n="header | the pay period date of the document in the list@@PayPeriodHeader">Fecha de Pago: {{doc.PayperiodDate | date}} </p>
-
-                                 <p *ngIf="doc.AlwaysShow == 1" mat-line i18n="header | the pay period date of the document in the list@@PayPeriodHeader">Fecha de Documento: {{doc.PayperiodDate | date}} </p>
-                                 <p style="float:left;padding-left:200px" *ngIf="doc.AlwaysShow == 0" i18n="header | the sign status of the document in the list@@DocumentSignStatusHeader"> {{doc.PayAmount}}</p>
-                                 <p style="float:left;padding-left:200px" *ngIf="doc.AlwaysShow == 1" i18n="header | the sign status of the document in the list@@DocumentSignStatusHeader"> </p>
-                                 <p style="float:left;padding-left:50px" i18n="header | the sign status of the document in the list@@DocumentSignStatusHeader">{{doc.SignStatus}}</p>
-     </mat-list-item>
-             </ng-container>
-         </div>
-     </mat-list>
-</div>
-<h4 *ngIf="!documents || (!docsWithSignStatus1Exist && !showAll)" style="text-align: center" i18n="message | a message to let the user know there are no documents to view@@DocumentSignStatusHeader"> No hay documentos para revisar y firmar </h4>-->
-
 <mat-spinner style="margin:0 auto;" *ngIf="!isPromiseDone"></mat-spinner>
-<h2 style="text-align:center; margin: 0 auto; width:100%" i18n="title | title for a list of documents@@DocumentTitle" class="mobileHeader">Documentos</h2>
-<div style="width: 75%; margin: 0 auto; text-align: end" class="mobileCheckbox">
-    <mat-checkbox [(ngModel)]="showAll" color="primary" i18n="question | ask to show all documents in list@@ShowAllDocChkBox">Todos los Documentos?</mat-checkbox>
+<br>
+<div class="container">
+  <h2 i18n="title | title for a list of documents@@DocumentTitle"
+      class="text-center">Recibos de nómina</h2>
+  <div class="row">
+    <div class="col-md-3 centerText">
+      <mat-checkbox #unsignedDocuments color="primary" id="unsignedDocuments" (change)="selectedBox1(unsignedDocuments.checked)" [checked]="unsignedDocumentsBox"
+                    i18n="question | ask to show all documents in list@@ShowAllDocChkBox">Para Firmar
+      </mat-checkbox>
+    </div>
+    <div class="col-md-3 centerText">
+      <mat-checkbox #signedReceipts color="primary" id="signedReceipts" (change)="selectedBox2(signedReceipts.checked)" [checked]="signedReceiptsBox"
+                    i18n="question | ask to show all documents in list@@ShowAllDocChkBox">Recibos firmados
+      </mat-checkbox>
+    </div>
+    <div class="col-md-3 centerText">
+      <mat-checkbox #receipts color="primary" id="receipts" (change)="selectedBox3(receipts.checked)" [checked]="receiptsBox"
+                    i18n="question | ask to show all documents in list@@ShowAllDocChkBox">Recibos
+      </mat-checkbox>
+    </div>
+    <div class="col-md-3 centerText">
+      <mat-checkbox #documentsD color="primary" id="documentsD" (change)="selectedBox4(documentsD.checked)" [checked]="documentsBox"
+                    i18n="question | ask to show all documents in list@@ShowAllDocChkBox">Documentos
+      </mat-checkbox>
+
+    </div>
+  </div>
 </div>
-<div *ngIf="(docsWithSignStatus1Exist || showAll)" style="width: 75%; margin:auto;" class="mobileTableDisplay">
-    <mat-list dense matSort (matSortChange)="sortDocuments($event)">
-        <h3 mat-sort-header="DocumentId" style="float:left; padding-left:25px" i18n="title | the id of the document@@DocumentIdTitle">Identificacion</h3>
-        <h3 mat-sort-header="SignStatus" style="float:right; padding-right:25px" i18n="title | the sign status of the document@@DocumentSignStatusTitle">Estado</h3>
-        <div style="clear:both"></div>
-        <div style="max-height:75vh; overflow-y:auto">
-            <ng-container *ngFor="let doc of sortedDocument">
-                <mat-list-item *ngIf="showAll || doc.SignStatus === 'Sin Firma'" style="border-bottom: 1px solid grey" [routerLink]="['/documents', doc.DocumentId]" routerLinkActive="active">
-                    <mat-icon mat-list-icon>insert_drive_file</mat-icon>
-                    <h4 mat-line i18n="header | the id of the document in the list@@DocumentIdHeader">Numero: {{doc.DocumentId}}</h4>
-                    <p mat-line i18n="header | the pay period date of the document in the list@@PayPeriodHeader">Fecha de Pago: {{doc.PayperiodDate | date}} </p>
-                    <p mat-line *ngIf="doc.AlwaysShow == 0" i18n="header | the sign status of the document in the list@@DocumentSignStatusHeader">Monto: {{doc.PayAmount}}</p>
-                    <p i18n="header | the sign status of the document in the list@@DocumentSignStatusHeader">{{doc.SignStatus}}</p>
-                </mat-list-item>
-            </ng-container>
-        </div>
-    </mat-list>
+<br>
+<div *ngIf="(docsWithSignStatus1Exist || showAll)" class="container">
+  <mat-list dense matSort (matSortChange)="sortDocuments($event)">
+    <h2 mat-sort-header="DocumentId" style="float:left; padding-left:25px"
+        i18n="title | the id of the document@@DocumentIdTitle">Identificación</h2>
+    <h2 mat-sort-header="SignStatus" style="float:right; padding-right:25px"
+        i18n="title | the sign status of the document@@DocumentSignStatusTitle">Status</h2>
+    <div style="clear:both"></div>
+    <div class="mobileTableDisplay">
+      <ng-container *ngFor="let doc of sortedDocument">
+        <mat-list-item *ngIf="doc.ViewFlag" style="border-bottom: 1px solid grey"
+                       [routerLink]="['/documents', doc.DocumentId]" routerLinkActive="active">
+          <mat-icon mat-list-icon>insert_drive_file</mat-icon>
+          <h4 mat-line i18n="header | the id of the document in the list@@DocumentIdHeader">Numero:
+            {{doc.DocumentId}}</h4>
+          <p mat-line i18n="header | the pay period date of the document in the list@@PayPeriodHeader">Fecha de Pago:
+            {{doc.PayperiodDate | date}} </p>
+          <p mat-line *ngIf="doc.AlwaysShow == 0"
+             i18n="header | the sign status of the document in the list@@DocumentSignStatusHeader">Monto:
+            {{'$' + doc.PayAmountMoney}}</p>
+          <p i18n="header | the sign status of the document in the list@@DocumentSignStatusHeader">
+            {{doc.SignStatus}}</p>
+        </mat-list-item>
+      </ng-container>
+    </div>
+  </mat-list>
 </div>
-<h4 *ngIf="!documents || (!docsWithSignStatus1Exist && !showAll)" style="text-align: center" i18n="message | a message to let the user know there are no documents to view@@DocumentSignStatusHeader"> No hay documentos para revisar y firmar </h4>
+<h4 *ngIf="!documents || (!docsWithSignStatus1Exist && !showAll)" style="text-align: center"
+    i18n="message | a message to let the user know there are no documents to view@@DocumentSignStatusHeader"> !No hay
+  más documentos por firmar! </h4>

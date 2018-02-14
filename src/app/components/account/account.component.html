@@ -1,46 +1,106 @@
 ﻿<!--<mat-spinner style="margin:0 auto;" *ngIf="!isPromiseDone"></mat-spinner>-->
 <div style="overflow-y: auto">
-    <div>
-        <mat-card *ngIf="employee.EmployeeStatus != 2" style="margin: auto; width: 60%; text-align: center; float:none" class="loginFormMobile">
-            <h1 style="text-align:center">
-                <h2 i18n="header | header for where the user will enter their login credentials @@LoginFormHeader">Cambia la Contraseña</h2>
-            </h1>
+  <div>
+    <mat-card  style="margin: auto; width: 60%; text-align: center; float:none" class="loginFormMobile" *ngIf="employee.EmployeeStatus != 2">
+      <h1 style="text-align:center">
+        <h2 i18n="header | header for where the user will enter their login credentials @@LoginFormHeader">Crea tu cuenta</h2>
+      </h1>
 
-            <mat-card-content>
-                <div style="max-height: 100vh; overflow-y: auto" class="centeredList" *ngIf="employee">
+      <mat-card-content>
+        <div style="max-height: 100vh; overflow-y: auto" class="centeredList" *ngIf="employee">
 
-                    <form  class="example-form">
-                        <mat-form-field class="example-full-width">
-                            <input type="password" required matInput placeholder="Codigo de seguridad" [formControl]="securityCodeFormControl" [(ngModel)]="employeePasswordDetails.SecurityCode" name=securityCode
-                                   i18n-placeholder="@@EmployeePasswordHashField" />
-                            <mat-error *ngIf="securityCodeFormControl.hasError('required')" i18n="message | letting the user know that they need to enter their password@@PasswordRequiredMessage">
-                                Codigo de seguridad <strong>Requerida</strong>
-                            </mat-error>
-                        </mat-form-field>
+          <form class="example-form">
+            <mat-form-field class="example-full-width">
+              <input type="text" required matInput placeholder="Código de seguridad"
+                     [formControl]="securityCodeFormControl" [(ngModel)]="employeePasswordDetails.SecurityCode"
+                     name=securityCode
+                     i18n-placeholder="@@EmployeePasswordHashField"/>
+              <mat-icon matSuffix>confirmation_number</mat-icon>
+              <mat-error *ngIf="securityCodeFormControl.hasError('required')"
+                         i18n="message | letting the user know that they need to enter their password@@PasswordRequiredMessage">
+                Código de seguridad es <strong>Requerido</strong>
+              </mat-error>
+            </mat-form-field>
 
-                            <mat-form-field class="example-full-width">
-                                <input type="password" required matInput placeholder="Contraseña" [formControl]="passwordFormControl" [(ngModel)]="employeePasswordDetails.PasswordHash" name=employeePasswordHash
-                                       i18n-placeholder="@@EmployeePasswordHashField" />
-                                <mat-error *ngIf="passwordFormControl.hasError('required')" i18n="message | letting the user know that they need to enter their password@@PasswordRequiredMessage">
-                                    Contrasena <strong>Requerida</strong>
-                                </mat-error>
-                            </mat-form-field>
+            <mat-form-field class="example-full-width">
+              <input type="text" required matInput placeholder="Nombre(s)"
+                     [formControl]="nameFormControl" [(ngModel)]="employeePasswordDetails.FirstName"
+                     name=securityCode
+                     i18n-placeholder="@@EmployeePasswordHashField"/>
+              <mat-icon matSuffix>account_circle</mat-icon>
+              <mat-error *ngIf="nameFormControl.hasError('required')"
+                         i18n="message | letting the user know that they need to enter their password@@PasswordRequiredMessage">
+                Nombre(s) es <strong>Requerido</strong>
+              </mat-error>
+            </mat-form-field>
 
-                            <mat-form-field class="example-full-width">
-                                <input type="password" required matInput [formControl]="passwordVerifyFormControl" pattern="{{employeePasswordDetails.PasswordHash}}" placeholder="Verificación de Contraseña" name=employeeVerifyPasswordHash
-                                       i18n-placeholder="@@EmployeeVerifypasswordHashField" />
-                                <mat-error *ngIf="passwordVerifyFormControl.hasError('required')" i18n="message | letting the user know that they need to enter their password@@PasswordRequiredMessage">
-                                    Contrasena <strong>Requerida</strong>
-                                </mat-error>
-                                <mat-error *ngIf="passwordVerifyFormControl.hasError('pattern')" i18n="message | letting the user know that they need to enter matching password@@PasswordMatchingRequiredMessage">
-                                    <strong>Verificar</strong> Contraseñas
-                                </mat-error>
-                        </mat-form-field>
-                    </form>
-                  </div> 
-            </mat-card-content>
-            <button mat-raised-button color="primary" style="width:40%" (click)=reroute() i18n="action | user will click this to login to thet website@@LoginButtonAction"> Update </button>
-        </mat-card>
-        <h4 *ngIf="employee.EmployeeStatus == 2" style="text-align: center" i18n="message | a message to let the user know there are no documents to view@@DocumentSignStatusHeader"> Invalid page, please request a pasword reset </h4>
-    </div>
+            <mat-form-field class="example-full-width">
+              <input type="text" required matInput placeholder="Apellido Paterno"
+                     [formControl]="last1FormControl" [(ngModel)]="employeePasswordDetails.LastName1"
+                     name=securityCode
+                     i18n-placeholder="@@EmployeePasswordHashField"/>
+              <mat-icon matSuffix>account_circle</mat-icon>
+              <mat-error *ngIf="last1FormControl.hasError('required')"
+                         i18n="message | letting the user know that they need to enter their password@@PasswordRequiredMessage">
+                Apellido Paterno es <strong>Requerido</strong>
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+              <input type="text" required matInput placeholder="Apellido Materno"
+                     [formControl]="last2FormControl" [(ngModel)]="employeePasswordDetails.LastName2"
+                     name=securityCode
+                     i18n-placeholder="@@EmployeePasswordHashField"/>
+              <mat-icon matSuffix>account_circle</mat-icon>
+              <mat-error *ngIf="last2FormControl.hasError('required')"
+                         i18n="message | letting the user know that they need to enter their password@@PasswordRequiredMessage">
+                Apellido Materno es <strong>Requerido</strong>
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+              <input [type]="hide ? 'password' : 'text'" required matInput placeholder="Contraseña" [formControl]="passwordFormControl"
+                     [(ngModel)]="employeePasswordDetails.PasswordHash" name=employeePasswordHash
+                     pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$"
+                     i18n-placeholder="@@EmployeePasswordHashField"/>
+              <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+              <mat-error *ngIf="passwordFormControl.hasError('required')"
+                         i18n="message | letting the user know that they need to enter their password@@PasswordRequiredMessage">
+                Contraseña es <strong>Requerida</strong>
+              </mat-error>
+              <mat-error *ngIf="passwordFormControl.hasError('pattern')"
+                         i18n="message | letting the user know that they need to enter matching password@@PasswordMatchingRequiredMessage">
+                La contraseña debe tener al menos 6 carácteres, una letra mayúscula, una minúscula y un número.
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+              <input [type]="hideV ? 'password' : 'text'" required matInput [formControl]="passwordVerifyFormControl"
+                     pattern="{{employeePasswordDetails.PasswordHash}}" placeholder="Verificación de Contraseña"
+                     name=employeeVerifyPasswordHash
+                     i18n-placeholder="@@EmployeeVerifypasswordHashField"/>
+              <mat-icon matSuffix (click)="hideV = !hideV">{{hideV ? 'visibility' : 'visibility_off'}}</mat-icon>
+              <mat-error *ngIf="passwordVerifyFormControl.hasError('required')"
+                         i18n="message | letting the user know that they need to enter their password@@PasswordRequiredMessage">
+                Contraseña es <strong>Requerida</strong>
+              </mat-error>
+              <mat-error *ngIf="passwordVerifyFormControl.hasError('pattern')"
+                         i18n="message | letting the user know that they need to enter matching password@@PasswordMatchingRequiredMessage">
+                Las contraseñas deben <strong>iguales</strong>
+              </mat-error>
+            </mat-form-field>
+          </form>
+        </div>
+      </mat-card-content>
+      <button mat-raised-button color="primary" style="width:40%" (click)=reroute()
+              i18n="action | user will click this to login to thet website@@LoginButtonAction">
+        Update
+      </button>
+    </mat-card>
+    <h4 *ngIf="employee.EmployeeStatus == 2" style="text-align: center"
+        i18n="message | a message to let the user know there are no documents to view@@DocumentSignStatusHeader">
+      <br>
+      El link de creación de cuenta es incorrecto o ha expirado.
+    </h4>
+  </div>
 </div>
