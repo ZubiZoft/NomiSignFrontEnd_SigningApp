@@ -14,7 +14,7 @@
               <input type="text" required matInput placeholder="Código de seguridad"
                      [formControl]="form.controls['securityCode']" [(ngModel)]="employeePasswordDetails.SecurityCode"
                      name=securityCode
-                     i18n-placeholder="@@EmployeePasswordHashField" minlength="4"/>
+                     i18n-placeholder="@@EmployeePasswordHashField" minlength="3"/>
               <mat-icon matSuffix>confirmation_number</mat-icon>
               <mat-error *ngIf="form.controls['securityCode'].hasError('required')"
                          i18n="message | letting the user know that they need to enter their password@@PasswordRequiredMessage">
@@ -65,7 +65,7 @@
             <mat-form-field class="example-full-width">
               <input [type]="hide ? 'password' : 'text'" required matInput placeholder="Contraseña" [formControl]="form.controls['password']"
                      [(ngModel)]="employeePasswordDetails.PasswordHash" name=employeePasswordHash
-                     pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$"
+                     pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&¡¿]{6,}"
                      i18n-placeholder="@@EmployeePasswordHashField"/>
               <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
               <mat-error *ngIf="form.controls['password'].hasError('required')"
@@ -74,7 +74,7 @@
               </mat-error>
               <mat-error *ngIf="form.controls['password'].hasError('pattern')"
                          i18n="message | letting the user know that they need to enter matching password@@PasswordMatchingRequiredMessage">
-                La contraseña debe tener al menos 6 carácteres, una letra mayúscula, una minúscula y un número.
+                La contraseña debe tener al menos 6 carácteres, una letra mayúscula, una minúscula, un número y un carácter especial [$@!%*?&¡¿].
               </mat-error>
             </mat-form-field>
 

@@ -16,7 +16,7 @@
             <div class="form-group col-md-12">
               <label i18n="header | asking for the user's email@@PasswordLoginForm" style="display:inline-block; width:12%;text-align:left" class="loginFormFieldsMobile">Celular o Email</label>
               <mat-form-field class="example-full-width">
-                <input type="text" matInput [formControl]="usernameFormControl" [(ngModel)]=userName>
+                <input type="email" matInput [formControl]="usernameFormControl" [(ngModel)]=userName>
                 <mat-error *ngIf="usernameFormControl.hasError('required')" i18n="message | letting the user know that they need to enter their username@@UsernameRequiredMessage">
                   El email es un campo <strong>obligatorio</strong>
                 </mat-error>

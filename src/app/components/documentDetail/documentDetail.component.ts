@@ -32,7 +32,7 @@ export class DocumentDetailComponent implements OnInit {
       .subscribe(data => {
         this.document = data;
         this.isPromiseDone = true;
-        this.isUnsigned = (this.document.SignStatus === 1);
+        this.isUnsigned = (this.document.SignStatus !== 2);
       });
   }
 

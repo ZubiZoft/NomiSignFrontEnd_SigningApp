@@ -27,11 +27,11 @@ export class AccountComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute, public snackbar: MatSnackBar, private employeeService: EmployeeService,
               private formBuilder: FormBuilder, public dialog: MatDialog, public userService: UserService) {
     this.form = formBuilder.group({
-      'securityCode': [null, Validators.compose([Validators.minLength(4), Validators.required])],
+      'securityCode': [null, Validators.compose([Validators.minLength(3), Validators.required])],
       'firstName': [null, Validators.required],
       'lastName1': [null, Validators.required],
       'lastName2': [null, Validators.required],
-      'password': [null, Validators.compose([Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{6,}$')])],
+      'password': [null, Validators.compose([Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*?&])[A-Za-z\\d$@$!%*?&]{6,}')])],
       'verifyPassword': [null, Validators.compose([Validators.required, Validators.pattern('')])]
     });
   }
