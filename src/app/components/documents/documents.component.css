@@ -1,7 +1,7 @@
 .mobileTableDisplay {
   overflow-y: auto;
   position: absolute;
-  top: 300px;
+  top: 335px;
   bottom: 15px;
   left: 10%;
   right: 10%;
@@ -28,7 +28,7 @@
   .mobileTableDisplay {
     overflow-y: auto;
     position: absolute;
-    top: 300px;
+    top: 360px;
     bottom: 15px;
     width: 95% !important;
     left: 10px;

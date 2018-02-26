@@ -69,7 +69,7 @@ export class ChangePasswordComponent implements OnInit {
 
   updateUserPassword() {
       this.route.paramMap
-          .switchMap((params: ParamMap) => this.employeeService.updateEmployeePassword(this.employee.EmployeeId, this.employee).finally(
+          .switchMap((params: ParamMap) => this.employeeService.updateEmployeePasswordSession(this.employee.EmployeeId, this.employee).finally(
             () => this.snackbar.open("sucessfully updated", "", { duration: 5000 })))
           .subscribe(data => this.employee = data,
           error => this.snackbar.open(error, "", { duration: 5000 }))

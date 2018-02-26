@@ -7,6 +7,7 @@ export class Document {
     PayAmountMoney: string;
     AlwaysShow: number;
     ViewFlag: boolean;
+    NomCert: string;
     Links: {
         SelfUri: string
     }

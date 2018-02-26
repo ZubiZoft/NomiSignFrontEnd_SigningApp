@@ -1,13 +1,14 @@
-import {Component, OnInit, SecurityContext} from '@angular/core';
-import {ActivatedRoute, ParamMap} from '@angular/router';
+import {Component, Inject, OnInit, SecurityContext, LOCALE_ID} from '@angular/core';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';
 import {Location} from '@angular/common';
-import {MatSnackBar} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatSnackBar} from '@angular/material';
 import 'rxjs/add/operator/switchMap';
 import {DocumentService} from '../../services/documents.service';
 import {UserService} from '../../services/user.service';
 import {User} from '../../models/user.model';
 import {DocumentDetail} from '../../models/documentDetail.model';
+import {FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-document-detail',
@@ -21,10 +22,10 @@ export class DocumentDetailComponent implements OnInit {
   isUnsigned = false;
 
   constructor(private documentService: DocumentService, private userService: UserService, private route: ActivatedRoute,
-              private sanitizer: DomSanitizer, public snackBar: MatSnackBar, private _location: Location) { }
+              private sanitizer: DomSanitizer, public snackBar: MatSnackBar, private _location: Location, public dialog: MatDialog) {
+  }
 
   ngOnInit() {
-    console.log(this.isPromiseDone);
     this.user = this.userService.getUser();
     this.route.paramMap
       .switchMap((params: ParamMap) => this.documentService.getUserDocumentData(this.user.EmployeeId, params.get('id')))
@@ -35,22 +36,26 @@ export class DocumentDetailComponent implements OnInit {
       });
   }
 
-  signDocument() {
+  signDocumentConfirm() {
     this.document.SignStatus = 2;
-    this.documentService.updateDocument(this.user.EmployeeId, this.document).subscribe(
-      data => {
-        this.openDocumentNotice(this.document.SignStatus);
-        this._location.back();
-      });
+    let dd = new Date(this.document.PayperiodDate);
+    let dialogRef = this.dialog.open(SignatureConfirmDialogComponent, {
+      width: '50%',
+      data: {
+        'period': dd.toLocaleDateString('es-MX'),
+        'employeeId': this.user.EmployeeId,
+        'document': this.document
+      }
+    });
   }
 
   refuseDocument() {
-    var reason = prompt('Please enter your refused reason', '');
-    this.document.EmployeeConcern = reason;
-    this.document.SignStatus = 3;
-    this.documentService.updateDocument(this.user.EmployeeId, this.document).subscribe(data => {
-      this.openDocumentNotice(this.document.SignStatus);
-      this._location.back();
+    let dialogRef = this.dialog.open(RejectReasonDialogComponent, {
+      width: '50%',
+      data: {
+        'employeeId': this.user.EmployeeId,
+        'document': this.document
+      }
     });
   }
 
@@ -61,6 +66,13 @@ export class DocumentDetailComponent implements OnInit {
     if (docSignStatus === 3) {
       this.snackBar.openFromComponent(DocumentRejectNoticeComponent, {duration: 3000});
     }
+  }
+
+  showNomCert() {
+    let dialogRef = this.dialog.open(Nom151DialogComponent, {
+      width: '50%',
+      data: {'message': this.document.NomCert}
+    });
   }
 }
 
@@ -79,3 +91,95 @@ export class DocumentSignedNoticeComponent {
 })
 export class DocumentRejectNoticeComponent {
 }
+
+@Component({
+  selector: 'nom-151-dialog-component',
+  templateUrl: 'nom-151-dialog-component.html',
+})
+export class Nom151DialogComponent implements OnInit {
+
+  nomCert: string;
+
+  constructor(public dialogRef: MatDialogRef<Nom151DialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
+  }
+
+  ngOnInit() {
+    this.nomCert = this.data['message'];
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+}
+
+@Component({
+  selector: 'signature-confirm-dialog-component',
+  templateUrl: 'signature-confirm-dialog-component.html',
+})
+export class SignatureConfirmDialogComponent implements OnInit {
+
+  period: string;
+  document: DocumentDetail;
+  employeeId: number;
+
+  constructor(public dialogRef: MatDialogRef<SignatureConfirmDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
+              public documentService: DocumentService, private router: Router) {
+  }
+
+  ngOnInit() {
+    this.period = this.data['period'];
+    this.document = this.data['document'];
+    this.employeeId = this.data['employeeId'];
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  signDocument() {
+    this.documentService.updateDocument(this.employeeId, this.document).subscribe(
+      data => {
+        this.router.navigateByUrl('/documents');
+        this.dialogRef.close();
+      });
+  }
+}
+
+@Component({
+  selector: 'reject-reason-dialog-component',
+  templateUrl: 'reject-reason-dialog-component.html',
+})
+export class RejectReasonDialogComponent implements OnInit {
+
+  document: DocumentDetail;
+  employeeId: number;
+  reason: string;
+  reasonField = new FormControl('', [
+    Validators.required,
+    Validators.maxLength(250),
+  ]);
+
+  constructor(public dialogRef: MatDialogRef<RejectReasonDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
+              public documentService: DocumentService, private router: Router) {
+  }
+
+  ngOnInit() {
+    this.document = this.data['document'];
+    this.employeeId = this.data['employeeId'];
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  rejectDocument() {
+    this.document.SignStatus = 3;
+    this.document.EmployeeConcern = this.reason;
+    this.documentService.updateDocument(this.employeeId, this.document).subscribe(data => {
+      this.router.navigateByUrl('/documents');
+      this.dialogRef.close();
+    });
+  }
+}
+

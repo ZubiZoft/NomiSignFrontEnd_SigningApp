@@ -8,13 +8,13 @@
 
     <button mat-button routerLink="/documents" routerLinkActive="active">
       <span i18n="menu header | User will click this to navigate to the home page@@GoHomePageMenuHeader">
-        Home
+        Inicio
       </span>
     </button>
     <span title="{{displayName}}" style="float:right" *ngIf="username">
       <button mat-button [matMenuTriggerFor]="menu">
         <mat-icon>person</mat-icon>
-        <span class="d-inline-block text-truncate" style="max-width: 120px;">{{displayName}}</span>
+        <span class="d-inline-block text-truncate" style="max-width: 150px;">{{displayName}}</span>
         <mat-icon>arrow_drop_down</mat-icon>
       </button>
       <mat-menu #menu="matMenu">

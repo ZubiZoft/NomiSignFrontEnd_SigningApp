@@ -1,21 +1,23 @@
-import {Component, OnInit, ElementRef} from '@angular/core';
+import {Component, OnInit, ElementRef, LOCALE_ID} from '@angular/core';
 import {DocumentService} from '../../services/documents.service';
 import {UserService} from '../../services/user.service';
 import {User} from '../../models/user.model';
 import {Document} from '../../models/document.model';
 import {Sort} from '@angular/material';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-documents',
   templateUrl: './documents.component.html',
-  styleUrls: ['./documents.component.css']
+  styleUrls: ['./documents.component.css'],
+  providers: [{provide: LOCALE_ID, useValue: 'es-MX' }]
 })
 
 export class DocumentsComponent implements OnInit {
   user: User;
   documents: Document[] = [];
   isPromiseDone = false;
-  showAll: boolean;
+  name: string;
   signedReceiptsBox = false;
   unsignedDocumentsBox = true;
   receiptsBox = false;
@@ -23,8 +25,7 @@ export class DocumentsComponent implements OnInit {
   docsWithSignStatus1Exist = false;
   sortedDocument;
 
-  constructor(private documentService: DocumentService, private userService: UserService, private elementRef: ElementRef) {
-  }
+  constructor(private documentService: DocumentService, private userService: UserService, private elementRef: ElementRef) { }
 
   sortDocuments(sort: Sort) {
     const data = this.documents.slice();
@@ -137,7 +138,9 @@ export class DocumentsComponent implements OnInit {
       s = n < 0 ? '-' : '',
       i = String(parseInt(n = Math.abs(Number(n) || 0).toFixed(c))),
       j = (j = i.length) > 3 ? j % 3 : 0;
-    return s + (j ? i.substr(0, j) + t : '') + i.substr(j).replace(/(\d{3})(?=\d)/g, '$1' + t) + (c ? d + Math.abs(n - Number(i)).toFixed(c).slice(2) : '');
+    return s + (j ? i.substr(0, j) + t : '') +
+      i.substr(j).replace(/(\d{3})(?=\d)/g, '$1' + t) +
+      (c ? d + Math.abs(n - Number(i)).toFixed(c).slice(2) : '');
   }
 
 

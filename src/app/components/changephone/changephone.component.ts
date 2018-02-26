@@ -69,7 +69,8 @@ export class ChangePhoneComponent implements OnInit {
 
   updateUserPhone() {
     this.route.paramMap
-      .switchMap((params: ParamMap) => this.employeeService.updateEmployeeDetails(this.employee.EmployeeId, this.employee).finally(() => this.snackbar.open('sucessfully updated', '', {duration: 5000})))
+      .switchMap((params: ParamMap) => this.employeeService.updateEmployeePhone(this.employee.EmployeeId, this.employee).finally(
+        () => this.snackbar.open('sucessfully updated', '', {duration: 5000})))
       .subscribe(data => this.employee = data,
         error => this.snackbar.open(error, '', {duration: 5000}));
   }

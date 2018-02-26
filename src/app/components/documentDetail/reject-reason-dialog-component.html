@@ -1,0 +1,23 @@
+<h2 class="centerText">¿Cúal es la razón por la que rechaza esta nómina?</h2>
+<hr>
+<div class="example-container">
+  <mat-form-field style="width: 100%;">
+    <textarea matInput placeholder="Razón" [(ngModel)]="reason" maxlength="250" required matTextareaAutosize matAutosizeMinRows="2"
+              matAutosizeMaxRows="5" [formControl]="reasonField"></textarea>
+    <mat-error *ngIf="reasonField.hasError('required')"
+               i18n="message | letting the user know that they need to enter their password@@PasswordRequiredMessage">
+      La razón es un campo <strong>Requerida</strong>
+    </mat-error>
+    <mat-error *ngIf="reasonField.hasError('maxlength')"
+               i18n="message | letting the user know that they need to enter their password@@PasswordRequiredMessage">
+      El tamaño máximo es de <strong>250</strong> carácteres.
+    </mat-error>
+  </mat-form-field>
+</div>
+<hr>
+<div>
+  <button  type="button" class="btn btn-danger" (click)="onNoClick()">Cancelar</button>
+  <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+  <button type="button" class="btn btn-success float-right" (click)="rejectDocument()"
+  [disabled]="reasonField.invalid">Confirmar</button>
+</div>

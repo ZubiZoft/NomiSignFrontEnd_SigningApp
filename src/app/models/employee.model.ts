@@ -16,4 +16,5 @@ export class EmployeeModel {
   LastName1: string;
   LastName2: string;
   FirstName: string;
+  HasContractToSign: boolean;
 }

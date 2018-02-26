@@ -28,11 +28,11 @@ import {DocumentsComponent} from './components/documents/documents.component';
 import {
   DocumentDetailComponent,
   DocumentSignedNoticeComponent,
-  DocumentRejectNoticeComponent
+  DocumentRejectNoticeComponent, Nom151DialogComponent, SignatureConfirmDialogComponent, RejectReasonDialogComponent
 } from './components/documentDetail/documentDetail.component';
 import {NotFoundComponent} from './components/notfound/notfound.component';
 import {LoginComponent} from './components/login/login.component';
-import {AccountComponent} from './components/account/account.component';
+import {AccountComponent, AlertTermsComponent} from './components/account/account.component';
 import {LoginAlertDialog} from './components/login/login.component';
 import {PasswordAlertDialog} from './components/account/account.component';
 import {AuthService} from './services/auth.service';
@@ -43,6 +43,9 @@ import {ChangePasswordComponent} from './components/changepassword/changepasswor
 import {ChangePhoneComponent} from './components/changephone/changephone.component';
 import {EmployeeSecurityQuestionsComponent} from './components/securityquestions/securityquestions.component';
 import { SafePipePipe } from './pipes/safe-pipe.pipe';
+import { TermsConditionsComponentComponent } from './components/terms-conditions-component/terms-conditions-component.component';
+import { ContractComponentComponent } from './components/contract-component/contract-component.component';
+import {EmployeeService} from './services/employee.service';
 
 @NgModule({
   declarations: [
@@ -55,11 +58,17 @@ import { SafePipePipe } from './pipes/safe-pipe.pipe';
     DocumentSignedNoticeComponent,
     DocumentRejectNoticeComponent,
     LoginAlertDialog,
+    Nom151DialogComponent,
+    SignatureConfirmDialogComponent,
+    RejectReasonDialogComponent,
     PasswordAlertDialog,
+    AlertTermsComponent,
     ChangePasswordComponent,
     ChangePhoneComponent,
     EmployeeSecurityQuestionsComponent,
-    SafePipePipe
+    SafePipePipe,
+    TermsConditionsComponentComponent,
+    ContractComponentComponent
   ],
   imports: [
     BrowserModule,
@@ -80,9 +89,10 @@ import { SafePipePipe } from './pipes/safe-pipe.pipe';
     HttpModule,
     MatDialogModule
   ],
-  providers: [AuthService, DocumentService, UserService, AuthGuard],
+  providers: [AuthService, DocumentService, UserService, AuthGuard, EmployeeService],
   bootstrap: [AppComponent],
-  entryComponents: [DocumentSignedNoticeComponent, DocumentRejectNoticeComponent, LoginAlertDialog, PasswordAlertDialog],
+  entryComponents: [DocumentSignedNoticeComponent, DocumentRejectNoticeComponent, LoginAlertDialog, PasswordAlertDialog,
+    AlertTermsComponent, Nom151DialogComponent, SignatureConfirmDialogComponent, RejectReasonDialogComponent],
 })
 export class AppModule {
 }

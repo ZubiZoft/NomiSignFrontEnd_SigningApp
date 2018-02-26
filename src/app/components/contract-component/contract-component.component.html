@@ -1,0 +1,25 @@
+<mat-spinner style="margin:0 auto;" *ngIf="!isPromiseDone"></mat-spinner>
+<div *ngIf="document" style="text-align:center; align-content: center">
+  <h1 i18n="header | Header for the document displayed below@@DocumentSignStatusHeader">Estado del Contrato:
+    {{document.SignStatusText}}</h1>
+  <h2 style="font-weight: lighter">Para revisar tus nóminas, por favor firma tu contrato.</h2>
+  <div class="container-btns">
+    <div style="float:left">
+      <button *ngIf="isUnsigned" mat-raised-button style="background-color: green" (click)="signDocument()"
+              i18n="action | the user can click to sign the document@@DocumentActionSign"> Firmar
+      </button>
+    </div>
+    <!--<div *ngIf="isUnsigned" style="float:right">
+      <button mat-raised-button style="background-color: red" (click)="refuseDocument()"
+              i18n="action | the user can click to reject the document @@DocumentSignStatusHeader"> Rechazar
+      </button>
+    </div>-->
+  </div>
+
+  <div class="pdf-viewer" >
+
+    <iframe width="100%" height="100%" [src]="document.DocumentBytes | safePipe"
+            alt="Problem loading image"
+            i18n-alt="text when image fails|The image could not be loaded" class="mobileImageDisplay"> </iframe>
+  </div>
+</div>

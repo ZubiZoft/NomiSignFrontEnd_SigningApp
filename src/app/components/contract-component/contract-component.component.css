@@ -1,0 +1,45 @@
+@media screen and (max-width: 720px) {
+  .mobileImageDisplay {
+    width: 100%
+  }
+
+  .pdf-viewer {
+    padding: 5px;
+    position: absolute;
+    top: 270px !important;
+    bottom: 8px;
+    clear: both;
+    border: 1px solid #607D8B;
+    background-color: #607D8B;
+    left: 8px !important;
+    right: 8px !important;
+  }
+
+  .container-btns {
+    margin-right: 8px;
+    margin-left: 8px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+}
+
+.pdf-viewer {
+  padding: 5px;
+  position: absolute;
+  top: 280px;
+  bottom: 15px;
+  clear: both;
+  border: 1px solid #2cbbc3;
+  background-color: #2cbbc3;
+  left: 10%;
+  right: 10%;
+}
+
+.container-btns {
+  margin-right: 10%;
+  margin-left: 10%;
+}
+
+mat-spinner.small-spinner svg { width: 40px !important; height: 40px !important; }

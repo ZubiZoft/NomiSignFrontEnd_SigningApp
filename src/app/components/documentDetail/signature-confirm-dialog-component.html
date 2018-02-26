@@ -1,0 +1,10 @@
+<h2 mat-dialog-title class="centerText">¿Estas seguro de firmar este recibo?</h2>
+<mat-dialog-content>
+  Al firmar, estas confirmando que su nómina para el período <strong>{{period}}</strong> es correcta y completa.
+</mat-dialog-content>
+<hr>
+<div>
+  <button  type="button" class="btn btn-danger" (click)="onNoClick()">Cancelar</button>
+  <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+  <button type="button" class="btn btn-success float-right" (click)="signDocument()">Confirmar</button>
+</div>

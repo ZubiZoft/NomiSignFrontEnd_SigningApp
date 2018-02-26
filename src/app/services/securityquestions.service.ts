@@ -14,7 +14,7 @@ const rootURL: string = environment.serviceUrl;
 export class SecurityQuestionService {
 
     constructor(private http: Http) { }
-   
+
     //GET/:cid
     getEmployeeSecurityQuestions(employeeId: string): Observable<any> {
         var _headers = new Headers({})
@@ -34,7 +34,6 @@ export class SecurityQuestionService {
         var _headers = new Headers({ 'Content-Type': 'application/json' })
         var options = new RequestOptions({ method: 'POST', headers: _headers })
         var body = JSON.stringify(securityQuestions);
-        console.log(securityQuestions)
         var url = rootURL + 'api/securityquestions'
         return this.http.post(url, body, options).map(response => response.json());
     }
