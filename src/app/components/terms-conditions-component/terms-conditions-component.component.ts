@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AppSettings} from '../../app.settings';
 
 @Component({
   selector: 'app-terms-conditions-component',

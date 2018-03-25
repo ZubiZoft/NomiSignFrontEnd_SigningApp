@@ -1,6 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
+.pointer {
+  cursor: pointer;
+}
+
 .mat-checkbox-checked.mat-primary .mat-checkbox-background {
   background-color: #2cbbc3;
 }
@@ -9,7 +13,7 @@
   background-color: #2cbbc3;
 }
 
-html {
+/*html {
   height: 100% !important;
 }
 
@@ -21,7 +25,7 @@ body {
 html{
   background-color:#efefef !important;
   overflow:hidden;
-}
+}*/
 
 .inputSearchBox{
   border: 1px solid;
@@ -72,4 +76,17 @@ html{
   .vertical-scroll-temp {
     max-height: 280px;
   }
+
+  h2 {
+    font-size: 18px !important;
+  }
+
+  h1 {
+    font-size: 18px !important;
+  }
+
+  mat-checkbox {
+    font-size: 12px !important;
+  }
 }
+

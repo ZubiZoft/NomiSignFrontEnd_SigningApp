@@ -11,11 +11,13 @@ import {ChangePhoneComponent} from './components/changephone/changephone.compone
 import {User} from './models/user.model';
 import {EmployeeSecurityQuestionsComponent} from './components/securityquestions/securityquestions.component';
 import {ContractComponentComponent} from './components/contract-component/contract-component.component';
+import {ForgotMyPasswordComponent} from './components/forgot-my-password/forgot-my-password.component';
 
 const routes: Routes = [
   {path: 'account/:uid', component: AccountComponent},
   {path: '', redirectTo: '/login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
+  {path: 'forgot-my-password', component: ForgotMyPasswordComponent},
   {path: 'contract/:id', component: ContractComponentComponent},
   {path: 'documents', component: DocumentsComponent, data: User, canActivate: [AuthGuard]},
   {path: 'documents/:id', component: DocumentDetailComponent, data: User, canActivate: [AuthGuard]},

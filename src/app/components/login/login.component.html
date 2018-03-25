@@ -1,8 +1,8 @@
 <div style="position:absolute;top:20%;width:100%" class="loginContainerMobile">
-  <div style="width:60%; margin-left:35px; transform: translateY(200%)" class="loginTitleMobile centerText">
+  <div style="width:60%; margin-left:35px; transform: translateY(160%)" class="loginTitleMobile centerText">
     <h1>Firma de Nóminas</h1>
     <br>
-    <img style="width:84%;" src="../../assets/images/Nomi_Sign-12-1-1.png" class="loginLogoMobile leftFloat"/>
+    <img style="width:83%;" src="../../assets/images/Nomi_Sign-12-1-1.png" class="loginLogoMobile leftFloat"/>
   </div>
   <div>
     <mat-card style="margin-right:50px; width: 34%; text-align: center; float:right" class="loginFormMobile">
@@ -10,34 +10,40 @@
         <h2 i18n="header | header for where the user will enter their login credentials @@LoginFormHeader">Login</h2>
       </h1>
       <br>
-      <mat-card-content>
-        <form name="loginForm">
-          <div class="form-row">
-            <div class="form-group col-md-12">
-              <label i18n="header | asking for the user's email@@PasswordLoginForm" style="display:inline-block; width:12%;text-align:left" class="loginFormFieldsMobile">Celular o Email</label>
-              <mat-form-field class="example-full-width">
-                <input type="email" matInput [formControl]="usernameFormControl" [(ngModel)]=userName>
-                <mat-error *ngIf="usernameFormControl.hasError('required')" i18n="message | letting the user know that they need to enter their username@@UsernameRequiredMessage">
-                  El email es un campo <strong>obligatorio</strong>
-                </mat-error>
-              </mat-form-field>
-            </div>
+      <!--<mat-card-content>-->
+      <form name="loginForm">
+        <div class="form-row">
+          <div class="form-group col-md-12">
+            <mat-form-field class="example-full-width" style="width:85%">
+              <input matInput type="email" [formControl]="usernameFormControl" [(ngModel)]=userName
+                     placeholder="Célular o Email">
+              <mat-icon matSuffix>account_circle</mat-icon>
+              <mat-error *ngIf="usernameFormControl.hasError('required')"
+                         i18n="message | letting the user know that they need to enter their username@@UsernameRequiredMessage">
+                El email es un campo <strong>obligatorio</strong>
+              </mat-error>
+            </mat-form-field>
           </div>
-          <div class="form-row">
-            <div class="form-group col-md-12">
-              <label i18n="header | asking for the user's password@@PasswordLoginForm" style="display:inline-block; width:12%; text-align:left" class="loginFormFieldsMobile">Contraseña &nbsp;</label>
-              <mat-form-field class="example-full-width">
-                <input type="password" matInput [formControl]="passwordFormControl" [(ngModel)]="password">
-                <mat-error *ngIf="passwordFormControl.hasError('required')" i18n="message | letting the user know that they need to enter their password@@PasswordRequiredMessage">
-                  La contraseña es un campo <strong>obligatorio</strong>
-                </mat-error>
-              </mat-form-field>
-            </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-12">
+            <mat-form-field class="example-full-width" style="width:85%">
+              <input matInput type="password" [formControl]="passwordFormControl" [(ngModel)]="password"
+                     placeholder="Contraseña" [type]="hide ? 'password' : 'text'">
+              <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+              <mat-error *ngIf="passwordFormControl.hasError('required')"
+                         i18n="message | letting the user know that they need to enter their password@@PasswordRequiredMessage">
+                La contraseña es un campo <strong>obligatorio</strong>
+              </mat-error>
+            </mat-form-field>
           </div>
-        </form>
-      </mat-card-content>
-      <button md-raised-button color="primary" style="width:85%" (click)=login() i18n="action | user will click this to login to thet website@@LoginButtonAction"> Iniciar Sesión </button>
-      <br /><br /><a href="" (click)="gotoForgotPassword()" routerLinkActive="active">He olvidado mi contraseña</a>
+        </div>
+        <button md-raised-button color="primary" style="width:85%" (click)=login()
+                i18n="action | user will click this to login to thet website@@LoginButtonAction"> Iniciar Sesión
+        </button>
+      </form>
+      <!--</mat-card-content>-->
+      <br/><a href="" (click)="gotoForgotPassword()" routerLinkActive="active">Olvidé mi contraseña</a>
     </mat-card>
   </div>
 </div>

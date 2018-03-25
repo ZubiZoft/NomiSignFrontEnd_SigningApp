@@ -18,7 +18,11 @@
 
   <div class="pdf-viewer" >
 
-    <iframe width="100%" height="100%" [src]="document.DocumentBytes | safePipe"
+    <iframe style="width: 1px;
+        min-width: 100%;
+        *width: 100%; height: 1px;
+        min-height: 100%;"
+            [src]="document.DocumentBytes | safePipe"
             alt="Problem loading image"
             i18n-alt="text when image fails|The image could not be loaded" class="mobileImageDisplay"> </iframe>
   </div>

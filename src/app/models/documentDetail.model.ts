@@ -12,5 +12,5 @@ export class DocumentDetail {
     BatchId: number;
     Links: {
         SelfUri: string;
-    }
+    };
 }

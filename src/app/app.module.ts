@@ -46,6 +46,8 @@ import { SafePipePipe } from './pipes/safe-pipe.pipe';
 import { TermsConditionsComponentComponent } from './components/terms-conditions-component/terms-conditions-component.component';
 import { ContractComponentComponent } from './components/contract-component/contract-component.component';
 import {EmployeeService} from './services/employee.service';
+import { SessionTimeoutDialogComponent } from './components/session-timeout-dialog/session-timeout-dialog.component';
+import { ForgotMyPasswordComponent } from './components/forgot-my-password/forgot-my-password.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +70,9 @@ import {EmployeeService} from './services/employee.service';
     EmployeeSecurityQuestionsComponent,
     SafePipePipe,
     TermsConditionsComponentComponent,
-    ContractComponentComponent
+    ContractComponentComponent,
+    SessionTimeoutDialogComponent,
+    ForgotMyPasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -92,7 +96,8 @@ import {EmployeeService} from './services/employee.service';
   providers: [AuthService, DocumentService, UserService, AuthGuard, EmployeeService],
   bootstrap: [AppComponent],
   entryComponents: [DocumentSignedNoticeComponent, DocumentRejectNoticeComponent, LoginAlertDialog, PasswordAlertDialog,
-    AlertTermsComponent, Nom151DialogComponent, SignatureConfirmDialogComponent, RejectReasonDialogComponent],
+    AlertTermsComponent, Nom151DialogComponent, SignatureConfirmDialogComponent, RejectReasonDialogComponent,
+    SessionTimeoutDialogComponent],
 })
 export class AppModule {
 }

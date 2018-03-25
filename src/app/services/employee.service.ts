@@ -8,24 +8,40 @@ import {User} from '../models/user.model';
 
 import 'rxjs/add/operator/map';
 import {environment} from '../../environments/environment';
+import {UserService} from './user.service';
 
 const rootURL: string = environment.serviceUrl;
 
 @Injectable()
 export class EmployeeService {
 
-  constructor(private http: Http) {
-  }
+  constructor(private http: Http, private userService: UserService) { }
 
   //GET/:cid/:eid
   getEmployeeById(employeeId: string): Observable<any> {
-    var _headers = new Headers({});
+    const user = this.userService.getUser();
+    var _headers = new Headers({
+      'Content-Type': 'application/json',
+      'ClientType': 'nomisign',
+      'Authorization': 'Basic ' + user.SessionToken
+    });
     return this.http.get(rootURL + 'api/employee/' + employeeId, {headers: _headers}).map(response => response.json());
+  }
+
+  //GET/:cid/:eid
+  employeeByIdExixts(employeeId: string): Observable<any> {
+    var _headers = new Headers({});
+    return this.http.get(rootURL + 'api/employeeexist/' + employeeId, {headers: _headers}).map(response => response.json());
   }
 
   //PUT
   updateEmployeeDetails(employeeId: string, employee: EmployeeModel): Observable<any> {
-    var _headers = new Headers({'Content-Type': 'application/json'});
+    const user = this.userService.getUser();
+    var _headers = new Headers({
+      'Content-Type': 'application/json',
+      'ClientType': 'nomisign',
+      'Authorization': 'Basic ' + user.SessionToken
+    });
     var options = new RequestOptions({method: 'PUT', headers: _headers});
     var body = JSON.stringify(employee);
     var url = rootURL + 'api/employees/' + employeeId;
@@ -33,9 +49,14 @@ export class EmployeeService {
   }
 
   updateEmployeePhone(employeeId: string, employee: EmployeeModel): Observable<any> {
-    var _headers = new Headers({'Content-Type': 'application/json'});
+    const user = this.userService.getUser();
+    var _headers = new Headers({
+      'Content-Type': 'application/json',
+      'ClientType': 'nomisign',
+      'Authorization': 'Basic ' + user.SessionToken
+    });
     var options = new RequestOptions({method: 'PUT', headers: _headers});
-    employee.CellPhoneNumber = '521' + employee.CellPhoneNumber;
+    employee.CellPhoneNumber = employee.CellPhoneNumber;
     var body = JSON.stringify(employee);
     var url = rootURL + 'api/employees/phone/' + employeeId;
     return this.http.put(url, body, options).map(response => response.json());
@@ -52,7 +73,12 @@ export class EmployeeService {
 
   //PUT
   updateEmployeePasswordSession(employeeId: string, employee: EmployeeModel): Observable<any> {
-    var _headers = new Headers({'Content-Type': 'application/json'});
+    const user = this.userService.getUser();
+    var _headers = new Headers({
+      'Content-Type': 'application/json',
+      'ClientType': 'nomisign',
+      'Authorization': 'Basic ' + user.SessionToken
+    });
     var options = new RequestOptions({method: 'PUT', headers: _headers});
     var body = JSON.stringify(employee);
     var url = rootURL + 'api/employees/passwordsession/' + employeeId;
@@ -60,7 +86,12 @@ export class EmployeeService {
   }
 
   looksForContracts(employee: EmployeeModel): Observable<any> {
-    var _headers = new Headers({'Content-Type': 'application/json'});
+    const user = this.userService.getUser();
+    var _headers = new Headers({
+      'Content-Type': 'application/json',
+      'ClientType': 'nomisign',
+      'Authorization': 'Basic ' + user.SessionToken
+    });
     var options = new RequestOptions({method: 'POST', headers: _headers});
     var body = JSON.stringify(employee);
     var url = rootURL + 'api/contracts';

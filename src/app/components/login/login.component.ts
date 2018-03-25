@@ -7,6 +7,7 @@ import {UserService} from '../../services/user.service';
 import {User} from '../../models/user.model';
 
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {Answers} from '../../models/Answers';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,8 @@ export class LoginComponent implements OnInit {
   };
   userName: string;
   password: string;
-  isPromiseDone: boolean = true;
+  isPromiseDone = true;
+  hide = true;
 
   activeUser: User;
   usernameFormControl = new FormControl('', [
@@ -36,35 +38,32 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-
   }
 
   gotoForgotPassword(): boolean {
-    var message = 'Se envio un enlace de restablecimiento de contrasena a su numero celular en el archivo';
     if (this.usernameFormControl.hasError('required') || this.usernameFormControl.hasError('email')) {
-      message = 'Pon su numero celular y entonces oprima \'me Olvide Mi Contrasena\'';
+      var message = 'Coloca tu número célular o email y entonces oprime \'Olvidé mi contraseña\'';
       let dialogRef = this.dialog.open(LoginAlertDialog, {
         width: '50%',
         data: {'message': message}
       });
-    }
-    else {
-      this.user.CellPhoneNumber = this.userName;
-      this.authService.sendPasswordReset(this.user).subscribe(
+    } else {
+      this.authService.getQuestions(this.userName).subscribe(
         userData => {
-          this.userService.setUser(userData);
-          let dialogRef = this.dialog.open(LoginAlertDialog, {
-            width: '50%',
-            data: {'message': message}
-          });
+          let u = new Answers();
+          u.Q1 = userData.SecurityQuestion1;
+          u.Q2 = userData.SecurityQuestion2;
+          u.Q3 = userData.SecurityQuestion3;
+          u.Email = this.userName;
+          this.userService.setAccountF(u);
+          this.router.navigate(['/forgot-my-password']);
         },
         error => {
           let dialogRef = this.dialog.open(LoginAlertDialog, {
             width: '50%',
-            data: {'message': 'Sí el número celular proporcionado fue correcto, se enviara un enlace de restablecimiento de contraseña'}
+            data: {'message': 'El número célular o email son incorrectos.'}
           });
         });
-
     }
     return false;
   }
@@ -81,10 +80,21 @@ export class LoginComponent implements OnInit {
     this.authService.loginUser(this.user).subscribe(
       userData => this.userService.setUser(userData),
       error => {
-        let dialogRef = this.dialog.open(LoginAlertDialog, {
+        console.log(error);
+        if (error.status === 409) {
+          let dialogRef = this.dialog.open(LoginAlertDialog, {
             width: '50%',
-            data: {'message': 'El numero celular y / o contrasena provistos no pudieron ser autenticados con exito'}
+            data: {
+              'message': 'Cuenta bloqueada',
+              'body': 'Tu cuenta ha sido bloqueda temporalmente. Por favor, utiliza \'Olvidé mi contraseña\' para reactivarla.'
+            }
           });
+        } else {
+          let dialogRef = this.dialog.open(LoginAlertDialog, {
+            width: '50%',
+            data: {'message': 'El número celular y/o contraseña provistos no pudieron ser autenticados con exito'}
+          });
+        }
       },
       () => this.router.navigate(['/documents']));
   }
@@ -102,9 +112,11 @@ export class LoginAlertDialog implements OnInit {
   }
 
   loginMessage: string;
+  bodyMessage: string;
 
   ngOnInit() {
-    this.loginMessage = this.data['message']; //"The email and/or password provided could not be authenticated sucessfully.";
+    this.loginMessage = this.data['message'];
+    this.bodyMessage = this.data['body'];
   }
 
   onNoClick(): void {

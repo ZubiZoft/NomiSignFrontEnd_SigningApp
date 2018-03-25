@@ -8,6 +8,7 @@ export class User {
     FullName: string;
     CURP: string;
     RFC: string;
+    SessionToken: string;
     CreatedByUserId: number;
     CellPhoneNumber: string;
     PasswordHash: string;

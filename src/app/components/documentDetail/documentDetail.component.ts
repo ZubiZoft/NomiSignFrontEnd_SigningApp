@@ -9,6 +9,7 @@ import {UserService} from '../../services/user.service';
 import {User} from '../../models/user.model';
 import {DocumentDetail} from '../../models/documentDetail.model';
 import {FormControl, Validators} from '@angular/forms';
+import {SessionTimeoutDialogComponent} from '../session-timeout-dialog/session-timeout-dialog.component';
 
 @Component({
   selector: 'app-document-detail',
@@ -21,18 +22,28 @@ export class DocumentDetailComponent implements OnInit {
   document: DocumentDetail;
   isUnsigned = false;
 
-  constructor(private documentService: DocumentService, private userService: UserService, private route: ActivatedRoute,
-              private sanitizer: DomSanitizer, public snackBar: MatSnackBar, private _location: Location, public dialog: MatDialog) {
+  constructor(private documentService: DocumentService, private route: ActivatedRoute, private sanitizer: DomSanitizer,
+              public snackBar: MatSnackBar, private _location: Location, public dialog: MatDialog, private userService: UserService,
+              private router: Router) {
   }
 
   ngOnInit() {
     this.user = this.userService.getUser();
     this.route.paramMap
-      .switchMap((params: ParamMap) => this.documentService.getUserDocumentData(this.user.EmployeeId, params.get('id')))
+      .switchMap((params: ParamMap) => this.documentService.getUserDocumentData(params.get('id')))
       .subscribe(data => {
         this.document = data;
         this.isPromiseDone = true;
         this.isUnsigned = (this.document.SignStatus !== 2);
+      }, error => {
+        if (error.status === 405) {
+          let dialogRef = this.dialog.open(SessionTimeoutDialogComponent, {
+            width: '75%'
+          });
+        } else {
+          this.userService.clearUser();
+          this.router.navigate(['/login']);
+        }
       });
   }
 
@@ -40,7 +51,7 @@ export class DocumentDetailComponent implements OnInit {
     this.document.SignStatus = 2;
     let dd = new Date(this.document.PayperiodDate);
     let dialogRef = this.dialog.open(SignatureConfirmDialogComponent, {
-      width: '50%',
+      width: '75%',
       data: {
         'period': dd.toLocaleDateString('es-MX'),
         'employeeId': this.user.EmployeeId,
@@ -51,7 +62,7 @@ export class DocumentDetailComponent implements OnInit {
 
   refuseDocument() {
     let dialogRef = this.dialog.open(RejectReasonDialogComponent, {
-      width: '50%',
+      width: '75%',
       data: {
         'employeeId': this.user.EmployeeId,
         'document': this.document
@@ -70,7 +81,7 @@ export class DocumentDetailComponent implements OnInit {
 
   showNomCert() {
     let dialogRef = this.dialog.open(Nom151DialogComponent, {
-      width: '50%',
+      width: '75%',
       data: {'message': this.document.NomCert}
     });
   }
@@ -79,7 +90,7 @@ export class DocumentDetailComponent implements OnInit {
 @Component({
   selector: 'document-sign-notice',
   template: `
-    <div i18n="notice | alert notifying the user they signed the document@@DocumentSignedNotice"> Document was signed</div>`
+    <div i18n="notice | alert notifying the user they signed the document@@DocumentSignedNotice">El documento fue firmado</div>`
 })
 export class DocumentSignedNoticeComponent {
 }
@@ -87,7 +98,7 @@ export class DocumentSignedNoticeComponent {
 @Component({
   selector: 'document-reject-notice',
   template: `
-    <div i18n="notice | alert notifying the user they rejected the document@@DocumentRejectedNotice"> Document was rejected</div>`
+    <div i18n="notice | alert notifying the user they rejected the document@@DocumentRejectedNotice">El documento fue rechazado</div>`
 })
 export class DocumentRejectNoticeComponent {
 }
@@ -124,7 +135,8 @@ export class SignatureConfirmDialogComponent implements OnInit {
   employeeId: number;
 
   constructor(public dialogRef: MatDialogRef<SignatureConfirmDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
-              public documentService: DocumentService, private router: Router) {
+              public documentService: DocumentService, public dialog: MatDialog, private userService: UserService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -142,6 +154,16 @@ export class SignatureConfirmDialogComponent implements OnInit {
       data => {
         this.router.navigateByUrl('/documents');
         this.dialogRef.close();
+      }, error => {
+        if (error.status === 405) {
+          this.dialog.closeAll();
+          let dialogRef = this.dialog.open(SessionTimeoutDialogComponent, {
+            width: '75%'
+          });
+        } else {
+          this.userService.clearUser();
+          this.router.navigate(['/login']);
+        }
       });
   }
 }
@@ -161,7 +183,8 @@ export class RejectReasonDialogComponent implements OnInit {
   ]);
 
   constructor(public dialogRef: MatDialogRef<RejectReasonDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
-              public documentService: DocumentService, private router: Router) {
+              public documentService: DocumentService, public dialog: MatDialog, private userService: UserService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -179,6 +202,16 @@ export class RejectReasonDialogComponent implements OnInit {
     this.documentService.updateDocument(this.employeeId, this.document).subscribe(data => {
       this.router.navigateByUrl('/documents');
       this.dialogRef.close();
+    }, error => {
+      if (error.status === 405) {
+        this.dialog.closeAll();
+        let dialogRef = this.dialog.open(SessionTimeoutDialogComponent, {
+          width: '75%'
+        });
+      } else {
+        this.userService.clearUser();
+        this.router.navigate(['/login']);
+      }
     });
   }
 }

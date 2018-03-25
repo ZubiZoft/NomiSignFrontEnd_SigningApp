@@ -3,14 +3,16 @@ import {DocumentService} from '../../services/documents.service';
 import {UserService} from '../../services/user.service';
 import {User} from '../../models/user.model';
 import {Document} from '../../models/document.model';
-import {Sort} from '@angular/material';
-import { DatePipe } from '@angular/common';
+import {MatDialog, Sort} from '@angular/material';
+import {DatePipe} from '@angular/common';
+import {SessionTimeoutDialogComponent} from '../session-timeout-dialog/session-timeout-dialog.component';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-documents',
   templateUrl: './documents.component.html',
   styleUrls: ['./documents.component.css'],
-  providers: [{provide: LOCALE_ID, useValue: 'es-MX' }]
+  providers: [{provide: LOCALE_ID, useValue: 'es-MX'}]
 })
 
 export class DocumentsComponent implements OnInit {
@@ -25,7 +27,8 @@ export class DocumentsComponent implements OnInit {
   docsWithSignStatus1Exist = false;
   sortedDocument;
 
-  constructor(private documentService: DocumentService, private userService: UserService, private elementRef: ElementRef) { }
+  constructor(private documentService: DocumentService, private elementRef: ElementRef,
+              public dialog: MatDialog, private userService: UserService, private router: Router) { }
 
   sortDocuments(sort: Sort) {
     const data = this.documents.slice();
@@ -159,6 +162,16 @@ export class DocumentsComponent implements OnInit {
       for (const d of this.documents) {
         d.PayAmountMoney = '';
         d.PayAmountMoney = this.convertToMoney(d.PayAmount, 2, '.', ',');
+      }
+    }, error => {
+      if (error.status === 405) {
+        this.dialog.closeAll();
+        let dialogRef = this.dialog.open(SessionTimeoutDialogComponent, {
+          width: '75%'
+        });
+      } else {
+        this.userService.clearUser();
+        this.router.navigate(['/login']);
       }
     });
   }

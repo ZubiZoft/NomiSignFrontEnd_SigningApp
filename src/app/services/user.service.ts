@@ -1,5 +1,7 @@
 import {Injectable, EventEmitter} from '@angular/core';
 import {User} from '../models/user.model';
+import {EmployeeSecurityQuestionsModel} from '../models/securityquestions.model';
+import {Answers} from '../models/Answers';
 
 @Injectable()
 export class UserService {
@@ -12,6 +14,14 @@ export class UserService {
     this._user = user;
     sessionStorage.setItem('user', JSON.stringify(user));
     this.userUpdated.emit();
+  }
+
+  public setAccountF(acc: Answers) {
+    sessionStorage.setItem('AccountF', JSON.stringify(acc));
+  }
+
+  public getAccountF(): Answers {
+    return JSON.parse(sessionStorage.getItem('AccountF'));
   }
 
   public getUser(): any {
@@ -29,9 +39,15 @@ export class UserService {
   }
 
   public clearUser() {
+    sessionStorage.removeItem('user');
     sessionStorage.clear();
     this._user = new User();
     this.userUpdated.emit();
+  }
+
+  public clearAccountF() {
+    sessionStorage.removeItem('AccountF');
+    sessionStorage.clear();
   }
 
   private _user: User;

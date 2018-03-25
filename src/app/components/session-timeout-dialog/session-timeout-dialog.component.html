@@ -1,0 +1,11 @@
+<div>
+  <h2 class="centerText" i18n="message | a message to let the user know the login failed">
+    ¡Sesión Expirada!
+  </h2>
+  <hr/>
+  <div style="overflow: hidden !important" class="text-justify">
+    Su sesión ha pasado los {{timeout}} minutos permitidos, por seguridad vuelva a iniciar sesión.
+  </div>
+  <br>
+  <button mat-raised-button color="primary" class="centerText" (click)="onNoClick()">Cerrar</button>
+</div>

@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import {DocumentDetail} from '../../models/documentDetail.model';
 import {User} from '../../models/user.model';
-import {ActivatedRoute, ParamMap} from '@angular/router';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {UserService} from '../../services/user.service';
-import {MatSnackBar} from '@angular/material';
+import {MatDialog, MatSnackBar} from '@angular/material';
 import {Location} from '@angular/common';
 import {DocumentService} from '../../services/documents.service';
 import {DomSanitizer} from '@angular/platform-browser';
 import {DocumentRejectNoticeComponent, DocumentSignedNoticeComponent} from '../documentDetail/documentDetail.component';
+import {PasswordAlertDialog} from '../account/account.component';
+import {SessionTimeoutDialogComponent} from '../session-timeout-dialog/session-timeout-dialog.component';
 
 @Component({
   selector: 'app-contract-component',
@@ -21,17 +23,27 @@ export class ContractComponentComponent implements OnInit {
   document: DocumentDetail;
   isUnsigned = false;
 
-  constructor(private documentService: DocumentService, private userService: UserService, private route: ActivatedRoute,
-              private sanitizer: DomSanitizer, public snackBar: MatSnackBar, private _location: Location) { }
+  constructor(public dialog: MatDialog, private userService: UserService, private router: Router,
+              private sanitizer: DomSanitizer, public snackBar: MatSnackBar, private _location: Location,
+              private documentService: DocumentService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.user = this.userService.getUser();
     this.route.paramMap
-      .switchMap((params: ParamMap) => this.documentService.getUserDocumentData(this.user.EmployeeId, params.get('id')))
+      .switchMap((params: ParamMap) => this.documentService.getUserDocumentData(params.get('id')))
       .subscribe(data => {
         this.document = data;
         this.isPromiseDone = true;
         this.isUnsigned = (this.document.SignStatus === 1);
+      }, error => {
+        if (error.status === 405) {
+          let dialogRef = this.dialog.open(SessionTimeoutDialogComponent, {
+            width: '75%'
+          });
+        } else {
+          this.userService.clearUser();
+          this.router.navigate(['/login']);
+        }
       });
   }
 
@@ -41,6 +53,15 @@ export class ContractComponentComponent implements OnInit {
       data => {
         this.openDocumentNotice(this.document.SignStatus);
         this._location.back();
+      }, error => {
+        if (error.status === 405) {
+          let dialogRef = this.dialog.open(SessionTimeoutDialogComponent, {
+            width: '75%'
+          });
+        } else {
+          this.userService.clearUser();
+          this.router.navigate(['/login']);
+        }
       });
   }
 

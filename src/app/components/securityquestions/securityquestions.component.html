@@ -1,62 +1,75 @@
-<div style="overflow-y: auto">
-    <div>
-        <mat-card style="margin: auto; width: 60%; text-align: center; float:none" class="loginFormMobile">
-            <h1 style="text-align:center">
-                <h2 i18n="header | header for where the user will enter their login credentials @@LoginFormHeader">Preguntas de seguridad</h2>
-            </h1>
+<div class="container centerText">
+  <br>
+  <h1 style="text-align:center">
+    <h2 i18n="header | header for where the user will enter their login credentials @@LoginFormHeader">Preguntas de
+      seguridad</h2>
+  </h1>
+    <div style="" class="centeredList">
+      <form class="example-form">
+        <mat-form-field class="example-full-width">
+          <input required matInput placeholder="Pregunta de seguridad 1" [formControl]="question1FormControl"
+                 value="{{securityQuestions.SecurityQuestion1}}" [(ngModel)]="securityQuestions.SecurityQuestion1"
+                 name=securityQuestion1
+                 i18n-placeholder="form | field displaying the company user's securityQuestion@@CompanyUserEmail">
+          <mat-error *ngIf="question1FormControl.hasError('required')"
+                     i18n="message | letting the user know that they need to enter their password@@PasswordRequiredMessage">
+            <strong>Requerida</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input required matInput placeholder="Responder 1" [formControl]="answer1FormControl"
+                 value="{{securityQuestions.SecurityAnswer1}}" [(ngModel)]="securityQuestions.SecurityAnswer1"
+                 name=securityAnswer1
+                 i18n-placeholder="form | field displaying the company user's securityQuestion@@CompanyUserEmail">
+          <mat-error *ngIf="answer1FormControl.hasError('required')"
+                     i18n="message | letting the user know that they need to enter their password@@PasswordRequiredMessage">
+            <strong>Requerida</strong>
+          </mat-error>
+        </mat-form-field>
 
-            <mat-card-content>
-                <div style="max-height: 70vh; overflow-y: auto" class="centeredList">
-                    <form class="example-form">
-                        <mat-form-field class="example-full-width">
-                            <input required matInput placeholder="Pregunta de seguridad 1" [formControl]="question1FormControl"  value="{{securityQuestions.SecurityQuestion1}}" [(ngModel)]="securityQuestions.SecurityQuestion1" name=securityQuestion1
-                                   i18n-placeholder="form | field displaying the company user's securityQuestion@@CompanyUserEmail">
-                            <mat-error *ngIf="question1FormControl.hasError('required')" i18n="message | letting the user know that they need to enter their password@@PasswordRequiredMessage">
-                                <strong>Requerida</strong>
-                            </mat-error>
-                        </mat-form-field>
-                        <mat-form-field class="example-full-width">
-                            <input required matInput placeholder="Responder 1" [formControl]="answer1FormControl" value="{{securityQuestions.SecurityAnswer1}}" [(ngModel)]="securityQuestions.SecurityAnswer1" name=securityAnswer1
-                                   i18n-placeholder="form | field displaying the company user's securityQuestion@@CompanyUserEmail">
-                            <mat-error *ngIf="answer1FormControl.hasError('required')" i18n="message | letting the user know that they need to enter their password@@PasswordRequiredMessage">
-                                <strong>Requerida</strong>
-                            </mat-error>
-                        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input required matInput placeholder="Pregunta de seguridad 2" [formControl]="question2FormControl"
+                 value="{{securityQuestions.SecurityQuestion2}}" [(ngModel)]="securityQuestions.SecurityQuestion2"
+                 name=securityQuestion2
+                 i18n-placeholder="form | field displaying the company user's securityQuestion@@CompanyUserEmail">
+          <mat-error *ngIf="question2FormControl.hasError('required')"
+                     i18n="message | letting the user know that they need to enter their password@@PasswordRequiredMessage">
+            <strong>Requerida</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input required matInput placeholder="Responder 2" [formControl]="answer2FormControl"
+                 value="{{securityQuestions.SecurityAnswer2}}" [(ngModel)]="securityQuestions.SecurityAnswer2"
+                 name=securityAnswer2
+                 i18n-placeholder="form | field displaying the company user's securityQuestion@@CompanyUserEmail">
+          <mat-error *ngIf="answer2FormControl.hasError('required')"
+                     i18n="message | letting the user know that they need to enter their password@@PasswordRequiredMessage">
+            <strong>Requerida</strong>
+          </mat-error>
+        </mat-form-field>
 
-                        <mat-form-field class="example-full-width">
-                            <input required matInput placeholder="Pregunta de seguridad 2" [formControl]="question2FormControl" value="{{securityQuestions.SecurityQuestion2}}" [(ngModel)]="securityQuestions.SecurityQuestion2" name=securityQuestion2
-                                   i18n-placeholder="form | field displaying the company user's securityQuestion@@CompanyUserEmail">
-                            <mat-error *ngIf="question2FormControl.hasError('required')" i18n="message | letting the user know that they need to enter their password@@PasswordRequiredMessage">
-                                <strong>Requerida</strong>
-                            </mat-error>
-                        </mat-form-field>
-                        <mat-form-field class="example-full-width">
-                            <input required matInput placeholder="Responder 2" [formControl]="answer2FormControl" value="{{securityQuestions.SecurityAnswer2}}" [(ngModel)]="securityQuestions.SecurityAnswer2" name=securityAnswer2
-                                   i18n-placeholder="form | field displaying the company user's securityQuestion@@CompanyUserEmail">
-                            <mat-error *ngIf="answer2FormControl.hasError('required')" i18n="message | letting the user know that they need to enter their password@@PasswordRequiredMessage">
-                                <strong>Requerida</strong>
-                            </mat-error>
-                        </mat-form-field>
-
-                        <mat-form-field class="example-full-width">
-                            <input required matInput placeholder="Pregunta de seguridad 3" [formControl]="question3FormControl" value="{{securityQuestions.SecurityQuestion3}}" [(ngModel)]="securityQuestions.SecurityQuestion3" name=securityQuestion3
-                                   i18n-placeholder="form | field displaying the company user's securityQuestion@@CompanyUserEmail">
-                            <mat-error *ngIf="question3FormControl.hasError('required')" i18n="message | letting the user know that they need to enter their password@@PasswordRequiredMessage">
-                                <strong>Requerida</strong>
-                            </mat-error>
-                        </mat-form-field>
-                        <mat-form-field class="example-full-width">
-                            <input required matInput placeholder="Responder 3" [formControl]="answer3FormControl" value="{{securityQuestions.SecurityAnswer3}}" [(ngModel)]="securityQuestions.SecurityAnswer3" name=securityAnswer3
-                                   i18n-placeholder="form | field displaying the company user's securityQuestion@@CompanyUserEmail">
-                            <mat-error *ngIf="answer3FormControl.hasError('required')" i18n="message | letting the user know that they need to enter their password@@PasswordRequiredMessage">
-                                <strong>Requerida</strong>
-                            </mat-error>
-                        </mat-form-field>
-                    </form>
-                </div>
-                </mat-card-content>
-                    <button mat-raised-button color="primary" (click)=saveNewSecurityQuestions() i18n="@@UpdateButton"> Cambia </button>
-                    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-            </mat-card>
-        </div>
-                
+        <mat-form-field class="example-full-width">
+          <input required matInput placeholder="Pregunta de seguridad 3" [formControl]="question3FormControl"
+                 value="{{securityQuestions.SecurityQuestion3}}" [(ngModel)]="securityQuestions.SecurityQuestion3"
+                 name=securityQuestion3
+                 i18n-placeholder="form | field displaying the company user's securityQuestion@@CompanyUserEmail">
+          <mat-error *ngIf="question3FormControl.hasError('required')"
+                     i18n="message | letting the user know that they need to enter their password@@PasswordRequiredMessage">
+            <strong>Requerida</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input required matInput placeholder="Responder 3" [formControl]="answer3FormControl"
+                 value="{{securityQuestions.SecurityAnswer3}}" [(ngModel)]="securityQuestions.SecurityAnswer3"
+                 name=securityAnswer3
+                 i18n-placeholder="form | field displaying the company user's securityQuestion@@CompanyUserEmail">
+          <mat-error *ngIf="answer3FormControl.hasError('required')"
+                     i18n="message | letting the user know that they need to enter their password@@PasswordRequiredMessage">
+            <strong>Requerida</strong>
+          </mat-error>
+        </mat-form-field>
+      </form>
+      <button mat-raised-button color="primary" (click)=saveNewSecurityQuestions() i18n="@@UpdateButton"> Cambiar</button>
+      <br/><br/><br/><br/><br/>
+    </div>
+</div>

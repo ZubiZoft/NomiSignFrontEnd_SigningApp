@@ -20,6 +20,18 @@ body {
     padding: 5px;
     color: #efefef;
   }
+
+  .mobhide {
+    display: none !important;
+  }
+
+  h2 {
+    font-size: 10px !important;
+  }
+
+  h1 {
+    font-size: 10px !important;
+  }
 }
 
 .sidenav{

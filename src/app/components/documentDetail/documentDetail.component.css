@@ -5,7 +5,7 @@
 
   .pdf-viewer {
     padding: 5px;
-    position: absolute;
+    position: fixed;
     top: 205px !important;
     bottom: 8px;
     clear: both;
