@@ -44,10 +44,11 @@ import {ChangePhoneComponent} from './components/changephone/changephone.compone
 import {EmployeeSecurityQuestionsComponent} from './components/securityquestions/securityquestions.component';
 import { SafePipePipe } from './pipes/safe-pipe.pipe';
 import { TermsConditionsComponentComponent } from './components/terms-conditions-component/terms-conditions-component.component';
-import { ContractComponentComponent } from './components/contract-component/contract-component.component';
+import {AlertPrintComponent, ContractComponentComponent} from './components/contract-component/contract-component.component';
 import {EmployeeService} from './services/employee.service';
 import { SessionTimeoutDialogComponent } from './components/session-timeout-dialog/session-timeout-dialog.component';
 import { ForgotMyPasswordComponent } from './components/forgot-my-password/forgot-my-password.component';
+import {DownloadComponent} from './components/download-component';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,9 @@ import { ForgotMyPasswordComponent } from './components/forgot-my-password/forgo
     TermsConditionsComponentComponent,
     ContractComponentComponent,
     SessionTimeoutDialogComponent,
-    ForgotMyPasswordComponent
+    ForgotMyPasswordComponent,
+    AlertPrintComponent,
+    DownloadComponent
   ],
   imports: [
     BrowserModule,
@@ -97,7 +100,7 @@ import { ForgotMyPasswordComponent } from './components/forgot-my-password/forgo
   bootstrap: [AppComponent],
   entryComponents: [DocumentSignedNoticeComponent, DocumentRejectNoticeComponent, LoginAlertDialog, PasswordAlertDialog,
     AlertTermsComponent, Nom151DialogComponent, SignatureConfirmDialogComponent, RejectReasonDialogComponent,
-    SessionTimeoutDialogComponent],
+    SessionTimeoutDialogComponent, AlertPrintComponent],
 })
 export class AppModule {
 }

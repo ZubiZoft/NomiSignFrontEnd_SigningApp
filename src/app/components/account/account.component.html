@@ -63,15 +63,14 @@
       </mat-form-field>
       </div>
       <div class="row">
-        <small style="color: gray">La contraseña debe tener al menos 6 carácteres, una letra mayúscula, una minúscula, un número y un carácter
-          especial [$@!%*?&-_¡¿#.,;:]</small>
+        <small style="color: gray">La contraseña debe tener al menos 6 carácteres, una letra mayúscula, una minúscula y un número.</small>
       </div>
       <div class="row">
       <mat-form-field class="example-full-width">
         <input [type]="hide ? 'password' : 'text'" required matInput placeholder="Contraseña"
                [formControl]="form.controls['password']"
                [(ngModel)]="employeePasswordDetails.PasswordHash" name=employeePasswordHash
-               pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&-_¡¿#.,;:])[A-Za-z\d$@$!%*?&-_¡¿#.,;:]{6,}"
+               pattern="^(?!(.{0,5}|[^0-9]*|[^A-Z]*|[^a-z]*)$).*$"
                i18n-placeholder="@@EmployeePasswordHashField"/>
         <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
         <mat-error *ngIf="form.controls['password'].hasError('required')"

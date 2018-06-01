@@ -6,6 +6,7 @@
   </h1>
     <div style="" class="centeredList">
       <form class="example-form">
+        <div class="row">
         <mat-form-field class="example-full-width">
           <input required matInput placeholder="Pregunta de seguridad 1" [formControl]="question1FormControl"
                  value="{{securityQuestions.SecurityQuestion1}}" [(ngModel)]="securityQuestions.SecurityQuestion1"
@@ -16,6 +17,8 @@
             <strong>Requerida</strong>
           </mat-error>
         </mat-form-field>
+        </div>
+        <div class="row">
         <mat-form-field class="example-full-width">
           <input required matInput placeholder="Responder 1" [formControl]="answer1FormControl"
                  value="{{securityQuestions.SecurityAnswer1}}" [(ngModel)]="securityQuestions.SecurityAnswer1"
@@ -26,7 +29,8 @@
             <strong>Requerida</strong>
           </mat-error>
         </mat-form-field>
-
+        </div>
+        <div class="row">
         <mat-form-field class="example-full-width">
           <input required matInput placeholder="Pregunta de seguridad 2" [formControl]="question2FormControl"
                  value="{{securityQuestions.SecurityQuestion2}}" [(ngModel)]="securityQuestions.SecurityQuestion2"
@@ -37,6 +41,8 @@
             <strong>Requerida</strong>
           </mat-error>
         </mat-form-field>
+        </div>
+        <div class="row">
         <mat-form-field class="example-full-width">
           <input required matInput placeholder="Responder 2" [formControl]="answer2FormControl"
                  value="{{securityQuestions.SecurityAnswer2}}" [(ngModel)]="securityQuestions.SecurityAnswer2"
@@ -47,7 +53,8 @@
             <strong>Requerida</strong>
           </mat-error>
         </mat-form-field>
-
+        </div>
+        <div class="row">
         <mat-form-field class="example-full-width">
           <input required matInput placeholder="Pregunta de seguridad 3" [formControl]="question3FormControl"
                  value="{{securityQuestions.SecurityQuestion3}}" [(ngModel)]="securityQuestions.SecurityQuestion3"
@@ -58,6 +65,8 @@
             <strong>Requerida</strong>
           </mat-error>
         </mat-form-field>
+        </div>
+        <div class="row">
         <mat-form-field class="example-full-width">
           <input required matInput placeholder="Responder 3" [formControl]="answer3FormControl"
                  value="{{securityQuestions.SecurityAnswer3}}" [(ngModel)]="securityQuestions.SecurityAnswer3"
@@ -68,8 +77,9 @@
             <strong>Requerida</strong>
           </mat-error>
         </mat-form-field>
+        </div>
       </form>
-      <button mat-raised-button color="primary" (click)=saveNewSecurityQuestions() i18n="@@UpdateButton"> Cambiar</button>
+      <button mat-raised-button color="primary" (click)=saveNewSecurityQuestions() i18n="@@UpdateButton">Continuar</button>
       <br/><br/><br/><br/><br/>
     </div>
 </div>

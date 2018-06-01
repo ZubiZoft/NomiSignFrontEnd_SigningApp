@@ -31,11 +31,17 @@ export class AppComponent {
 
   getCurrentUser() {
     let user = this.userService.getUser();
-
+    console.log(user);
     if (user) {
+      console.log('IN IF');
       this.userId = user.EmployeeId;
       this.displayName = user.FullName;
-      this.username = user.CellPhoneNumber;
+      if (user.CellPhoneNumber == '') {
+        this.username = user.EmailAddress;
+      } else {
+        this.username = user.CellPhoneNumber;
+      }
+      console.log(this.username);
       this.displayNameMobile = user.FullName;
       if (user.FullName) {
         if (user.FullName.length > 20) {

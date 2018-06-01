@@ -34,7 +34,7 @@ export class AccountComponent implements OnInit {
       'lastName1': [null, Validators.required],
       'lastName2': [null, Validators.required],
       'password': [null, Validators.compose([Validators.required,
-        Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*?&-_¡¿#.,;:])[A-Za-z\\d$@$!%*?&-_¡¿#.,;:]{6,}')])],
+        Validators.pattern('^(?!(.{0,5}|[^0-9]*|[^A-Z]*|[^a-z]*)$).*$')])],
       'verifyPassword': [null, Validators.required]
     }, {
       validator: PasswordValidation.MatchPassword // your validation method

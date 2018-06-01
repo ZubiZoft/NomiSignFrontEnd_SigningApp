@@ -10,7 +10,7 @@
 }
 
 .mat-raised-button.mat-primary {
-  background-color: #2cbbc3;
+  background-color: #2cbbc3 !important;
 }
 
 /*html {
