@@ -33,20 +33,21 @@
   </div>-->
 
   <div class="pdf-viewer">
-       <!--style="-webkit-overflow-scrolling: touch !important;
-       white-space: nowrap;"-->
     <div class="embed-responsive embed-responsive1by1" style="
         height: 100%!important;
         overflow-y: scroll;
         overflow-x: scroll;
-        -webkit-overflow-scrolling: touch; white-space: nowrap;">
-      <iframe type="application/pdf"
+        -webkit-overflow-scrolling: touch;
+        white-space: nowrap;">
+      <!--<iframe type="application/pdf"
               class="embed-responsive-item"
               [src]="document.DocumentBytes | safePipe"
               alt="Problem loading image"
               i18n-alt="text when image fails|The image could not be loaded">
 
-      </iframe>
+      </iframe>-->
+      <iframe [src]="'https://docs.google.com/gview?url=' + document.DocumentBytes + '&embedded=true'  | safePipe"
+              style="width:100%; height:100%;" frameborder="0"></iframe>
     </div>
     <!--<embed width="100%" height="100%" [src]="document.DocumentBytes | safePipe" type="application/pdf" />-->
     <!--<object width="100%" height="100%" [data]="document.DocumentBytes | safePipe" type="application/pdf">
@@ -54,3 +55,4 @@
     </object>-->
   </div>
 </div>
+

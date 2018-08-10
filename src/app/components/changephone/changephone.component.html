@@ -3,7 +3,7 @@
     <div>
         <mat-card style="margin: auto; width: 60%; text-align: center; float:none" class="loginFormMobile">
             <h1 style="text-align:center">
-                <h2 i18n="header | header for where the user will enter their login credentials @@LoginFormHeader">Cambia tu telefoño</h2>
+                <h2 i18n="header | header for where the user will enter their login credentials @@LoginFormHeader">Cambia tu teléfono</h2>
             </h1>
 
             <mat-card-content>
@@ -14,31 +14,31 @@
                             <input type="password" required matInput placeholder="Contraseña" [formControl]="passwordFormControl" [(ngModel)]="employeePasswordDetails.PasswordHash" name=employeeOldPasswordHash
                                    i18n-placeholder="@@EmployeePasswordHashField" />
                             <mat-error *ngIf="passwordFormControl.hasError('required')" i18n="message | letting the user know that they need to enter their password@@PasswordRequiredMessage">
-                                Contrasena <strong>Requerida</strong>
+                                Contraseña <strong>Requerida</strong>
                             </mat-error>
                         </mat-form-field>
 
 
                             <mat-form-field class="example-full-width">
-                                <input type="tel" required matInput placeholder="Nueva Numero Celular" [formControl]="phoneFormControl" [(ngModel)]="employeePasswordDetails.CellPhoneNumber" name=employeePhone
+                                <input type="tel" required matInput placeholder="Nuevo Número Celular" [formControl]="phoneFormControl" [(ngModel)]="employeePasswordDetails.CellPhoneNumber" name=employeePhone
                                        i18n-placeholder="@@EmployeePasswordHashField" />
                                 <mat-error *ngIf="phoneFormControl.hasError('required')" i18n="message | letting the user know that they need to enter their password@@PasswordRequiredMessage">
-                                    Numero Celular <strong>Requerida</strong>
+                                    Número Celular <strong>Requerida</strong>
                                 </mat-error>
                             </mat-form-field>
 
                             <mat-form-field class="example-full-width">
-                                <input type="tel" required matInput [formControl]="phoneVerifyFormControl" pattern="{{employeePasswordDetails.CellPhoneNumber}}" placeholder="Verificación Numero Celular" name=employeeVerifyPhone
+                                <input type="tel" required matInput [formControl]="phoneVerifyFormControl" pattern="{{employeePasswordDetails.CellPhoneNumber}}" placeholder="Verificación Número Celular" name=employeeVerifyPhone
                                        i18n-placeholder="@@EmployeeVerifypasswordHashField" />
                                 <mat-error *ngIf="phoneVerifyFormControl.hasError('required')" i18n="message | letting the user know that they need to enter their password@@PasswordRequiredMessage">
-                                    Verificación Numero Celular <strong>Requerida</strong>
+                                    Verificación Número Celular <strong>Requerida</strong>
                                 </mat-error>
                                 <mat-error *ngIf="phoneVerifyFormControl.hasError('pattern')" i18n="message | letting the user know that they need to enter matching password@@PasswordMatchingRequiredMessage">
-                                    <strong>Verificar</strong> Numero Celular
+                                    <strong>Verificar</strong> Número Celular
                                 </mat-error>
                         </mat-form-field>
                     </form>
-                  </div> 
+                  </div>
             </mat-card-content>
             <button mat-raised-button color="primary" style="width:40%" (click)=reroute() i18n="action | user will click this to login to thet website@@LoginButtonAction"> Cambia </button>
         </mat-card>

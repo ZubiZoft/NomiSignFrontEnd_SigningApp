@@ -133,6 +133,7 @@ export class SignatureConfirmDialogComponent implements OnInit {
   period: string;
   document: DocumentDetail;
   employeeId: number;
+  waitResponse = false;
 
   constructor(public dialogRef: MatDialogRef<SignatureConfirmDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
               public documentService: DocumentService, public dialog: MatDialog, private userService: UserService,
@@ -150,8 +151,10 @@ export class SignatureConfirmDialogComponent implements OnInit {
   }
 
   signDocument() {
+    this.waitResponse = true;
     this.documentService.updateDocument(this.employeeId, this.document).subscribe(
       data => {
+        this.waitResponse = false;
         this.router.navigateByUrl('/documents');
         this.dialogRef.close();
       }, error => {
