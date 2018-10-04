@@ -15,6 +15,7 @@ import {ForgotMyPasswordComponent} from './components/forgot-my-password/forgot-
 
 const routes: Routes = [
   {path: 'account/:uid', component: AccountComponent},
+  {path: 'a/:uid', component: AccountComponent},
   {path: '', redirectTo: '/login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {path: 'forgot-my-password', component: ForgotMyPasswordComponent},

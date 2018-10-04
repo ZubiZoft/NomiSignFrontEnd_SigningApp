@@ -8,7 +8,7 @@ import {EmployeeService} from '../../services/employee.service';
 import {EmployeeModel} from '../../models/employee.model';
 import {MatSnackBar, MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import {UserService} from '../../services/user.service';
-import {SessionTimeoutDialogComponent} from '../session-timeout-dialog/session-timeout-dialog.component';
+import {EmployeeSecurityQuestionsModel} from '../../models/securityquestions.model';
 
 @Component({
   selector: 'ng-account',
@@ -24,6 +24,7 @@ export class AccountComponent implements OnInit {
   hide = true;
   hideV = true;
   form: FormGroup;
+  securityQuestions: EmployeeSecurityQuestionsModel;
 
   constructor(private router: Router, private route: ActivatedRoute, public snackbar: MatSnackBar,
               private employeeService: EmployeeService, private formBuilder: FormBuilder, public dialog: MatDialog,
@@ -35,10 +36,17 @@ export class AccountComponent implements OnInit {
       'lastName2': [null, Validators.required],
       'password': [null, Validators.compose([Validators.required,
         Validators.pattern('^(?!(.{0,5}|[^0-9]*|[^A-Z]*|[^a-z]*)$).*$')])],
-      'verifyPassword': [null, Validators.required]
+      'verifyPassword': [null, Validators.required],
+      'SecurityQuestion1': [null, Validators.required],
+      'SecurityAnswer1': [null, Validators.required],
+      'SecurityQuestion2': [null, Validators.required],
+      'SecurityAnswer2': [null, Validators.required],
+      'SecurityQuestion3': [null, Validators.required],
+      'SecurityAnswer3': [null, Validators.required]
     }, {
       validator: PasswordValidation.MatchPassword // your validation method
     });
+    this.securityQuestions = new EmployeeSecurityQuestionsModel();
   }
 
   ngOnInit(): void {
@@ -65,6 +73,7 @@ export class AccountComponent implements OnInit {
   reroute(activeUser) {
     // will need phone later maybe  this.employeePasswordDetails.EmailAddress === this.employee.EmailAddress &&
     if (this.form.valid) {
+      this.isPromiseDone = false;
       let dialogRef = this.dialog.open(AlertTermsComponent, {
         width: '80%',
         height: '80%',
@@ -132,6 +141,12 @@ export class AlertTermsComponent implements OnInit {
     this.view.employee.LastName1 = this.view.employeePasswordDetails.LastName1;
     this.view.employee.LastName2 = this.view.employeePasswordDetails.LastName2;
     this.view.employee.EmployeeStatus = 2;
+    this.view.employee.Question1 = this.view.securityQuestions.SecurityQuestion1;
+    this.view.employee.Question2 = this.view.securityQuestions.SecurityQuestion2;
+    this.view.employee.Question3 = this.view.securityQuestions.SecurityQuestion3;
+    this.view.employee.Answer1 = this.view.securityQuestions.SecurityAnswer1;
+    this.view.employee.Answer2 = this.view.securityQuestions.SecurityAnswer2;
+    this.view.employee.Answer3 = this.view.securityQuestions.SecurityAnswer3;
 
     this.updateUserPassword(this.view.employee);
 

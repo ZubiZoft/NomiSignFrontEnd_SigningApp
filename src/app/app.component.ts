@@ -1,6 +1,6 @@
 import {Component, OnChanges} from '@angular/core';
 import {Router, NavigationStart, ActivatedRoute, ParamMap} from '@angular/router';
-
+import {DomSanitizer} from '@angular/platform-browser';
 import {UserService} from './services/user.service';
 import {SettingsService} from './services/settings.service';
 
@@ -18,30 +18,32 @@ export class AppComponent {
   displayName: string;
   displayNameMobile: string;
   userId: number;
+  src: string;
 
   constructor(private userService: UserService, private settingsService: SettingsService, private router: Router,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute, public _sanitizer: DomSanitizer) {
     settingsService.getSystemSettings().subscribe(data => this.title = data[0].ProductName);
     this.getCurrentUser();
     this.userService.userUpdated.subscribe((value) => {
       this.getCurrentUser();
     });
-    console.log(this.router.url);
   }
 
   getCurrentUser() {
     let user = this.userService.getUser();
-    console.log(user);
     if (user) {
-      console.log('IN IF');
       this.userId = user.EmployeeId;
+      this.settingsService.getCompanyLogo(user.CompanyId).subscribe(
+        data => {
+          this.src = data;
+        }, error => { }
+      );
       this.displayName = user.FullName;
       if (user.CellPhoneNumber == '') {
         this.username = user.EmailAddress;
       } else {
         this.username = user.CellPhoneNumber;
       }
-      console.log(this.username);
       this.displayNameMobile = user.FullName;
       if (user.FullName) {
         if (user.FullName.length > 20) {

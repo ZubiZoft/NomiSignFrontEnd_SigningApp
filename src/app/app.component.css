@@ -14,6 +14,10 @@ body {
   padding-right: 10%;
 }
 
+.mat-spinner circle {
+  stroke: #999999 !important;
+}
+
 @media screen and (max-width: 750px) {
   .toolbar{
     background-color: #2cbbc3;

@@ -77,6 +77,13 @@ export class LoginComponent implements OnInit {
     this.isPromiseDone = false;
     this.user.CellPhoneNumber = this.userName;
     this.user.PasswordHash = this.password;
+    if (this.userName === '') {
+      let dialogRef = this.dialog.open(LoginAlertDialog, {
+        width: '50%',
+        data: {'message': 'El número celular y/o contraseña provistos no pudieron ser autenticados con exito'}
+      });
+      return;
+    }
     this.authService.loginUser(this.user).subscribe(
       userData => this.userService.setUser(userData),
       error => {

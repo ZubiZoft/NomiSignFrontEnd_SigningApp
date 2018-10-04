@@ -17,4 +17,10 @@ export class EmployeeModel {
   LastName2: string;
   FirstName: string;
   HasContractToSign: boolean;
+  Question1: string;
+  Answer1: string;
+  Question2: string;
+  Answer2: string;
+  Question3: string;
+  Answer3: string;
 }
