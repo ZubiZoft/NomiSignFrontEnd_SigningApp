@@ -61,8 +61,9 @@
                 Pago:
                 {{doc.PayperiodDate | date:'fullDate':'':'es-MX'}} </p>
               <p mat-line *ngIf="doc.AlwaysShow == 0"
-                 i18n="header | the sign status of the document in the list@@DocumentSignStatusHeader">Monto:
-                {{'$' + doc.PayAmountMoney}}</p>
+                 i18n="header | the sign status of the document in the list@@DocumentSignStatusHeader">Percepción Bruta:
+                {{doc.PayAmount | currency:'MXN':'$'}}</p>
+              <p *ngIf="doc.NetPayAmount || doc.NetPayAmount != 0" mat-line>Percepción Neta: {{doc.NetPayAmount | currency:'MXN':'$'}}</p>
               <p i18n="header | the sign status of the document in the list@@DocumentSignStatusHeader">
                 {{doc.SignStatus}}</p>
             </mat-list-item>

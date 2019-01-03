@@ -77,11 +77,13 @@ export class AccountComponent implements OnInit {
       let dialogRef = this.dialog.open(AlertTermsComponent, {
         width: '80%',
         height: '80%',
-        data: this
+        data: { 'securityQuestions' : this.securityQuestions, 'employeePasswordDetails' : this.employeePasswordDetails,
+          'employeeId' : this.employee.EmployeeId }
       });
-      /*dialogRef.afterClosed().subscribe(() => {
-        dialogRef.close();
-      });*/
+      dialogRef.afterClosed().subscribe(
+        () => {
+          this.isPromiseDone = true;
+        });
     } else {
       let dialogRef = this.dialog.open(PasswordAlertDialog, {
         width: '50%',
@@ -119,7 +121,8 @@ export class PasswordAlertDialog implements OnInit {
 })
 export class AlertTermsComponent implements OnInit {
 
-  view: AccountComponent;
+  securityQuestions: EmployeeSecurityQuestionsModel;
+  employeePasswordDetails: EmployeeModel;
 
   constructor(public dialogRef: MatDialogRef<AlertTermsComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
               private employeeService: EmployeeService, private router: Router, private route: ActivatedRoute,
@@ -127,7 +130,8 @@ export class AlertTermsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.view = this.data;
+    this.securityQuestions = this.data['securityQuestions'];
+    this.employeePasswordDetails = this.data['employeePasswordDetails'];
   }
 
   onNoClick(): void {
@@ -135,33 +139,38 @@ export class AlertTermsComponent implements OnInit {
   }
 
   accepted(): void {
-    this.view.employee.PasswordHash = this.view.employeePasswordDetails.PasswordHash;
-    this.view.employee.SecurityCode = this.view.employeePasswordDetails.SecurityCode;
-    this.view.employee.FirstName = this.view.employeePasswordDetails.FirstName;
-    this.view.employee.LastName1 = this.view.employeePasswordDetails.LastName1;
-    this.view.employee.LastName2 = this.view.employeePasswordDetails.LastName2;
-    this.view.employee.EmployeeStatus = 2;
-    this.view.employee.Question1 = this.view.securityQuestions.SecurityQuestion1;
-    this.view.employee.Question2 = this.view.securityQuestions.SecurityQuestion2;
-    this.view.employee.Question3 = this.view.securityQuestions.SecurityQuestion3;
-    this.view.employee.Answer1 = this.view.securityQuestions.SecurityAnswer1;
-    this.view.employee.Answer2 = this.view.securityQuestions.SecurityAnswer2;
-    this.view.employee.Answer3 = this.view.securityQuestions.SecurityAnswer3;
+    let employee = new EmployeeModel();
+    employee.PasswordHash = this.employeePasswordDetails.PasswordHash;
+    employee.SecurityCode = this.employeePasswordDetails.SecurityCode;
+    employee.FirstName = this.employeePasswordDetails.FirstName;
+    employee.LastName1 = this.employeePasswordDetails.LastName1;
+    employee.LastName2 = this.employeePasswordDetails.LastName2;
+    employee.EmployeeStatus = 2;
+    employee.Question1 = this.securityQuestions.SecurityQuestion1;
+    employee.Question2 = this.securityQuestions.SecurityQuestion2;
+    employee.Question3 = this.securityQuestions.SecurityQuestion3;
+    employee.Answer1 = this.securityQuestions.SecurityAnswer1;
+    employee.Answer2 = this.securityQuestions.SecurityAnswer2;
+    employee.Answer3 = this.securityQuestions.SecurityAnswer3;
+    employee.EmployeeId = this.data['employeeId'];
 
-    this.updateUserPassword(this.view.employee);
-
-    this.dialogRef.close();
+    this.updateUserPassword(employee);
   }
 
   updateUserPassword(employee: EmployeeModel) {
-    this.employeeService.updateEmployeePassword(employee.EmployeeId, employee).finally(
-      () => {
-        this.snackbar.open('Cuenta actualizada correctamente', '', {duration: 5000});
-        this.router.navigate(['/login']);
-      })
+    this.employeeService.updateEmployeePassword(employee.EmployeeId, employee)
       .subscribe(
-        data => employee = data,
-        error => this.snackbar.open(error, '', {duration: 5000}));
+        data => {
+          employee = data;
+          this.snackbar.open('Cuenta actualizada correctamente', '', {duration: 5000});
+          this.router.navigate(['/login']);
+          this.dialogRef.close();
+        },
+        error => {
+          this.snackbar.open('El código de seguridad es incorrecto, por favor revisa tu información',
+            '', {duration: 10000});
+          this.dialogRef.close();
+        });
   }
 }
 

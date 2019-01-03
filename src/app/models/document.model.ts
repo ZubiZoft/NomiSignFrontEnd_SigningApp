@@ -4,6 +4,7 @@ export class Document {
     PayperiodDate: string;
     SignStatus: string;
     PayAmount: number;
+    NetPayAmount: number;
     PayAmountMoney: string;
     AlwaysShow: number;
     ViewFlag: boolean;
