@@ -74,11 +74,26 @@ export class AccountComponent implements OnInit {
     // will need phone later maybe  this.employeePasswordDetails.EmailAddress === this.employee.EmailAddress &&
     if (this.form.valid) {
       this.isPromiseDone = false;
+      this.employee.PasswordHash = this.employeePasswordDetails.PasswordHash;
+      this.employee.SecurityCode = this.employeePasswordDetails.SecurityCode;
+      this.employee.FirstName = this.employeePasswordDetails.FirstName;
+      this.employee.LastName1 = this.employeePasswordDetails.LastName1;
+      this.employee.LastName2 = this.employeePasswordDetails.LastName2;
+      this.employee.EmployeeStatus = 2;
+      this.employee.Question1 = this.securityQuestions.SecurityQuestion1;
+      this.employee.Question2 = this.securityQuestions.SecurityQuestion2;
+      this.employee.Question3 = this.securityQuestions.SecurityQuestion3;
+      this.employee.Answer1 = this.securityQuestions.SecurityAnswer1;
+      this.employee.Answer2 = this.securityQuestions.SecurityAnswer2;
+      this.employee.Answer3 = this.securityQuestions.SecurityAnswer3;
       let dialogRef = this.dialog.open(AlertTermsComponent, {
         width: '80%',
         height: '80%',
-        data: { 'securityQuestions' : this.securityQuestions, 'employeePasswordDetails' : this.employeePasswordDetails,
-          'employeeId' : this.employee.EmployeeId }
+        data: {
+          'securityQuestions' : this.securityQuestions,
+          'employeePasswordDetails' : this.employee,
+          'employeeId' : this.employee.EmployeeId
+        }
       });
       dialogRef.afterClosed().subscribe(
         () => {
@@ -139,22 +154,7 @@ export class AlertTermsComponent implements OnInit {
   }
 
   accepted(): void {
-    let employee = new EmployeeModel();
-    employee.PasswordHash = this.employeePasswordDetails.PasswordHash;
-    employee.SecurityCode = this.employeePasswordDetails.SecurityCode;
-    employee.FirstName = this.employeePasswordDetails.FirstName;
-    employee.LastName1 = this.employeePasswordDetails.LastName1;
-    employee.LastName2 = this.employeePasswordDetails.LastName2;
-    employee.EmployeeStatus = 2;
-    employee.Question1 = this.securityQuestions.SecurityQuestion1;
-    employee.Question2 = this.securityQuestions.SecurityQuestion2;
-    employee.Question3 = this.securityQuestions.SecurityQuestion3;
-    employee.Answer1 = this.securityQuestions.SecurityAnswer1;
-    employee.Answer2 = this.securityQuestions.SecurityAnswer2;
-    employee.Answer3 = this.securityQuestions.SecurityAnswer3;
-    employee.EmployeeId = this.data['employeeId'];
-
-    this.updateUserPassword(employee);
+    this.updateUserPassword(this.employeePasswordDetails);
   }
 
   updateUserPassword(employee: EmployeeModel) {
@@ -167,9 +167,9 @@ export class AlertTermsComponent implements OnInit {
           this.dialogRef.close();
         },
         error => {
+          this.dialogRef.close();
           this.snackbar.open('El código de seguridad es incorrecto, por favor revisa tu información',
             '', {duration: 10000});
-          this.dialogRef.close();
         });
   }
 }

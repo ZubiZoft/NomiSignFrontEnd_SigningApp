@@ -12,6 +12,15 @@
   margin-left: 5%;
 }
 
+.forgot-my-password {
+  color: #2cbbc3;
+  cursor: pointer;
+}
+
+.forgot-my-password:hover {
+  text-decoration-line: underline;
+}
+
 @media (max-device-width: 720px) {
   .loginLogoMobile {
     float: unset !important;

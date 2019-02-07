@@ -3,10 +3,15 @@ import {DocumentService} from '../../services/documents.service';
 import {UserService} from '../../services/user.service';
 import {User} from '../../models/user.model';
 import {Document} from '../../models/document.model';
-import {MatDialog, Sort} from '@angular/material';
+import {MatDialog, Sort, MatSort} from '@angular/material';
 import {DatePipe} from '@angular/common';
 import {SessionTimeoutDialogComponent} from '../session-timeout-dialog/session-timeout-dialog.component';
 import {ActivatedRoute, Router} from '@angular/router';
+import {DataSource} from '@angular/cdk/collections';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
+
+var dataD: Document[] = [];
 
 @Component({
   selector: 'app-documents',
@@ -25,7 +30,8 @@ export class DocumentsComponent implements OnInit {
   receiptsBox = false;
   documentsBox = false;
   docsWithSignStatus1Exist = false;
-  sortedDocument;
+  sortedDocument: Document[];
+  selectedStatus = 'Todos';
 
   constructor(private documentService: DocumentService, private elementRef: ElementRef,
               public dialog: MatDialog, private userService: UserService, private router: Router) { }
@@ -163,6 +169,7 @@ export class DocumentsComponent implements OnInit {
         d.PayAmountMoney = '';
         d.PayAmountMoney = this.convertToMoney(d.PayAmount, 2, '.', ',');
       }
+      this.isPromiseDone = true;
     }, error => {
       if (error.status === 405) {
         this.dialog.closeAll();

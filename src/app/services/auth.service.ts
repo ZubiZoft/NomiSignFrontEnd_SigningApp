@@ -39,6 +39,23 @@ export class AuthService {
     return this.http.post(url, body, options).map(response => response.json());
   }
 
+  sendPasswordResetByEmail(user0: Answers): Observable<any> {
+    let _headers = new Headers({'Content-Type': 'application/json'});
+    let options = new RequestOptions({method: 'POST', headers: _headers});
+    let url = rootURL + 'api/resetByEmail';
+
+    let temp = JSON.stringify(user0);
+    let user: Answers = JSON.parse(temp);
+
+    user.Q1 = null;
+    user.Q2 = null;
+    user.Q3 = null;
+
+    let body = JSON.stringify(user);
+
+    return this.http.post(url, body, options).map(response => response.json());
+  }
+
   getQuestions(account): Observable<any> {
     let _headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({method: 'POST', headers: _headers});

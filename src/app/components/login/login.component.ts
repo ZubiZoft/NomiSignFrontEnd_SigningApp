@@ -1,11 +1,9 @@
 import {Component, OnInit, Inject} from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
 import {UserService} from '../../services/user.service';
 import {User} from '../../models/user.model';
-
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import {Answers} from '../../models/Answers';
 
@@ -40,8 +38,8 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  gotoForgotPassword(): boolean {
-    if (this.usernameFormControl.hasError('required') || this.usernameFormControl.hasError('email')) {
+  gotoForgotPassword() {
+    /*if (this.usernameFormControl.hasError('required') || this.usernameFormControl.hasError('email')) {
       var message = 'Coloca tu número célular o email y entonces oprime \'Olvidé mi contraseña\'';
       let dialogRef = this.dialog.open(LoginAlertDialog, {
         width: '50%',
@@ -65,7 +63,20 @@ export class LoginComponent implements OnInit {
           });
         });
     }
-    return false;
+    return false;*/
+    let dialogRef = this.dialog.open(ForgotPasswordDialog, {
+      width: '50%'
+    });
+    dialogRef.afterClosed().subscribe(
+      () => {
+        this.dialog.open(LoginAlertDialog, {
+          width: '50%',
+          data: {
+            'message': 'Si la cuenta de correo o número célular es correcto, entonces recibirás un código para reiniciar tu cuenta.'
+          }
+        });
+      }
+    );
   }
 
   reroute(activeUser) {
@@ -77,17 +88,20 @@ export class LoginComponent implements OnInit {
     this.isPromiseDone = false;
     this.user.CellPhoneNumber = this.userName;
     this.user.PasswordHash = this.password;
-    if (this.userName === '') {
+    if (this.userName === '' || this.userName === null || this.userName === undefined) {
       let dialogRef = this.dialog.open(LoginAlertDialog, {
         width: '50%',
-        data: {'message': 'El número celular y/o contraseña provistos no pudieron ser autenticados con exito'}
+        data: {'message': 'El número célular, correo y/o contraseña provistos no pudieron ser autenticados con exito'}
       });
+      this.isPromiseDone = true;
       return;
     }
     this.authService.loginUser(this.user).subscribe(
-      userData => this.userService.setUser(userData),
+      userData => {
+        this.userService.setUser(userData);
+        this.isPromiseDone = true;
+      },
       error => {
-        console.log(error);
         if (error.status === 409) {
           let dialogRef = this.dialog.open(LoginAlertDialog, {
             width: '50%',
@@ -102,6 +116,7 @@ export class LoginComponent implements OnInit {
             data: {'message': 'El número celular y/o contraseña provistos no pudieron ser autenticados con exito'}
           });
         }
+        this.isPromiseDone = true;
       },
       () => this.router.navigate(['/documents']));
   }
@@ -130,5 +145,51 @@ export class LoginAlertDialog implements OnInit {
     this.dialogRef.close();
   }
 
+}
+
+@Component({
+  selector: 'forgot-my-password-dialog',
+  templateUrl: 'forgot-my-password-dialog.html',
+})
+export class ForgotPasswordDialog implements OnInit {
+
+  form: FormGroup;
+  message: string;
+  isPromiseDone = true;
+  email: Answers;
+
+  constructor(public dialogRef: MatDialogRef<ForgotPasswordDialog>, @Inject(MAT_DIALOG_DATA) public data: any,
+              private formBuilder: FormBuilder, private auth: AuthService, public dialog: MatDialog) {
+    this.form = formBuilder.group({
+      'email': [null, Validators.compose([Validators.required, Validators.email])]
+    });
+  }
+
+  ngOnInit() {
+    this.email = new Answers();
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  resetMyPassword() {
+    this.isPromiseDone = false;
+    this.auth.sendPasswordResetByEmail(this.email).subscribe(
+      () => {
+        this.dialogRef.close();
+        this.isPromiseDone = true;
+      }, error => {
+        this.dialog.open(LoginAlertDialog, {
+          width: '50%',
+          data: {
+            'message': '¡Hubo un error reiniciando la cuenta, por favor contacta a soporte técnico Nomisign!'
+          }
+        });
+        this.dialogRef.close();
+        this.isPromiseDone = true;
+      }
+    );
+  }
 }
 

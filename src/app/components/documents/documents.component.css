@@ -1,33 +1,44 @@
-/*.mobileTableDisplay {
-  overflow-y: auto;
+.main-view {
+  bottom: 60px;
+  top: 107px;
+  left: 0px;
+  right: 0px;
   position: absolute;
-  top: 335px;
-  bottom: 15px;
-  left: 10%;
-  right: 10%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
-@media (max-device-width: 720px) {
-  .mobileHeader {
-    float: left;
-    margin-left: 5px;
-  }
+.pagination-ctrl {
+  height: 60px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  position: absolute;
+}
 
-  .mobileCheckbox {
-    width: 90% !important;
-  }
+h2 {
+  margin: 14px 0;
+}
 
-  .mobileTableDisplay {
-    width: 100% !important;
-  }
+.directions {
+  font-size: 100%;
+}
 
-  .mobileTableDisplay {
-    overflow-y: auto;
-    position: absolute;
-    top: 360px;
-    bottom: 15px;
-    width: 95% !important;
-    left: 10px;
-    right: 10px;
+.employee-name {
+  font-weight: lighter;
+  color: #444;
+  max-width: 100%;
+}
+
+.counter {
+  text-align: right;
+  color: #2cbbc3;
+  font-size: 14px;
+  font-weight: lighter;
+}
+
+@media screen and (max-width: 750px) {
+  .directions {
+    font-size: 90% !important;
   }
-}*/
+}

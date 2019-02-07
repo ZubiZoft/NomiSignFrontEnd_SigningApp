@@ -1,4 +1,151 @@
-<mat-spinner style="margin:0 auto;" *ngIf="!isPromiseDone"></mat-spinner>
+<div class="main-view">
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <div class="col">
+        <br>
+        <h2 class="text-center">Recibos de Nómina</h2>
+      </div>
+    </div>
+    <div class="row justify-content-md-center">
+      <div class="col">
+        <h2 class="text-center employee-name">
+          {{user.FirstName + ' ' + user.LastName1 + ' ' + user.LastName2}}
+        </h2>
+      </div>
+    </div>
+    <div class="row justify-content-md-center">
+      <div class="col">
+        <hr>
+        <br>
+        <p class="text-center directions">
+          Seleccione el status de los recibos que desea visualizar o descargar.
+        </p>
+        <br>
+      </div>
+    </div>
+    <div class="row justify-content-md-center">
+      <div class="col text-center">
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false" style="border-color: white; width: 90%;
+                  background-color: #2cbbc3;">
+            {{selectedStatus}}
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" (click)="selectedStatus = 'Todos'">Todos</a>
+            <a class="dropdown-item" (click)="selectedStatus = 'Sin Firmar'">Sin Firmar</a>
+            <a class="dropdown-item" (click)="selectedStatus = 'Firmados'">Firmado</a>
+            <a class="dropdown-item" (click)="selectedStatus = 'Rechazados'">Rechazado</a>
+          </div>
+        </div>
+      </div>
+      <div class="col text-center">
+        <button type="button" class="btn btn-primary" style="width: 90%; background-color: #2cbbc3;
+            border-color: white;">Descargar</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <br>
+        <p class="counter" *ngIf="sortedDocument">Recibos: {{sortedDocument.length}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row justify-content-md-center" *ngIf="!isPromiseDone">
+      <mat-spinner color="primary"></mat-spinner>
+    </div>
+    <div class="row" *ngIf="isPromiseDone">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Recibo</th>
+            <th scope="col">Status</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <th scope="row">
+              <mat-checkbox class="example-margin" color="primary"></mat-checkbox>
+            </th>
+            <td>Mark</td>
+            <td>Otto</td>
+          </tr>
+          <tr>
+            <th scope="row">
+              <mat-checkbox class="example-margin" color="primary"></mat-checkbox>
+            </th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+          </tr>
+          <tr>
+            <th scope="row">
+              <mat-checkbox class="example-margin" color="primary"></mat-checkbox>
+            </th>
+            <td>Larry</td>
+            <td>the Bird</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <!--<mat-list dense matSort (matSortChange)="sortDocuments($event)" style="width: 100%;">
+        <h2 mat-sort-header="DocumentId" style="float:left; padding-left:25px"
+            i18n="title | the id of the document@@DocumentIdTitle">Identificación</h2>
+        <h2 mat-sort-header="SignStatus" style="float:right; padding-right:25px"
+            i18n="title | the sign status of the document@@DocumentSignStatusTitle">Status</h2>
+        <div style="clear:both"></div>
+        <div>
+          <ng-container *ngFor="let doc of sortedDocument">
+            <mat-list-item *ngIf="doc.ViewFlag" style="border-bottom: 1px solid grey"
+                           [routerLink]="['/documents', doc.DocumentId]" routerLinkActive="active"
+                           class="pointer">
+              <mat-checkbox> </mat-checkbox>
+              <mat-icon mat-list-icon>insert_drive_file</mat-icon>
+              <h4 mat-line i18n="header | the id of the document in the list@@DocumentIdHeader">Número:
+                {{doc.DocumentId}}</h4>
+              <p mat-line i18n="header | the pay period date of the document in the list@@PayPeriodHeader">Fecha de
+                Pago:
+                {{doc.PayperiodDate | date:'fullDate':'':'es-MX'}} </p>
+              <p mat-line *ngIf="doc.AlwaysShow == 0"
+                 i18n="header | the sign status of the document in the list@@DocumentSignStatusHeader">Percepción Bruta:
+                XXXXXXXXXXX
+              </p>
+              <p *ngIf="doc.NetPayAmount || doc.NetPayAmount != 0" mat-line>Percepción Neta: XXXXXXXXXXX</p>
+              <p i18n="header | the sign status of the document in the list@@DocumentSignStatusHeader">
+                {{doc.SignStatus}}</p>
+            </mat-list-item>
+          </ng-container>
+        </div>
+      </mat-list>-->
+    </div>
+    <div class="row">
+      <br>
+    </div>
+  </div>
+</div>
+<div class="pagination-ctrl" *ngIf="isPromiseDone">
+  <div class="container">
+    <div class="row">
+      <div class="col text-center align-middle">
+        <p style="padding: 12px; color: #808080;">
+          <i class="material-icons" style="vertical-align: middle;">first_page</i>
+          <i class="material-icons" style="vertical-align: middle;">chevron_left</i>
+          <i style="vertical-align: middle; color: #2cbbc3;">1</i>
+          <i style="vertical-align: middle;">2</i>
+          <i style="vertical-align: middle;">3</i>
+          <i style="vertical-align: middle;">4</i>
+          <i class="material-icons" style="vertical-align: middle;">chevron_right</i>
+          <i class="material-icons" style="vertical-align: middle;">last_page</i>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--<mat-spinner style="margin:0 auto;" *ngIf="!isPromiseDone"></mat-spinner>
 <br>
 <div style="overflow-y: auto;  -webkit-overflow-scrolling: touch;">
   <div class="container">
@@ -55,7 +202,7 @@
                            [routerLink]="['/documents', doc.DocumentId]" routerLinkActive="active"
                            class="pointer">
               <mat-icon mat-list-icon>insert_drive_file</mat-icon>
-              <h4 mat-line i18n="header | the id of the document in the list@@DocumentIdHeader">Numero:
+              <h4 mat-line i18n="header | the id of the document in the list@@DocumentIdHeader">Número:
                 {{doc.DocumentId}}</h4>
               <p mat-line i18n="header | the pay period date of the document in the list@@PayPeriodHeader">Fecha de
                 Pago:
@@ -73,6 +220,7 @@
     </div>
   </div>
 </div>
+<br>-->
 <!--<br>
 <div class="container">
   <mat-list dense matSort (matSortChange)="sortDocuments($event)">

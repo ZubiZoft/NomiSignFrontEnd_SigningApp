@@ -9,18 +9,12 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {
-  MatButtonModule,
-  MatCardModule,
-  MatToolbarModule,
-  MatInputModule,
-  MatListModule,
-  MatIconModule,
-  MatMenuModule,
-  MatSortModule,
-  MatCheckboxModule,
-  MatSnackBarModule,
-  MatDialogModule
+  MatButtonModule, MatCheckboxModule, MatInputModule, MatSidenavModule, MatCardModule, MatListModule, MatIconModule,
+  MatSelectModule, MatToolbarModule, MatMenuModule, MatSnackBarModule, MatDatepickerModule,
+  MatDialogModule, MatProgressSpinnerModule, MatNativeDateModule
 } from '@angular/material';
+
+import {MatTableModule} from '@angular/material/table';
 
 import {AppRoutingModule} from './app.routing';
 
@@ -33,7 +27,7 @@ import {
 import {NotFoundComponent} from './components/notfound/notfound.component';
 import {LoginComponent} from './components/login/login.component';
 import {AccountComponent, AlertTermsComponent} from './components/account/account.component';
-import {LoginAlertDialog} from './components/login/login.component';
+import {LoginAlertDialog, ForgotPasswordDialog} from './components/login/login.component';
 import {PasswordAlertDialog} from './components/account/account.component';
 import {AuthService} from './services/auth.service';
 import {DocumentService} from './services/documents.service';
@@ -42,12 +36,12 @@ import {AuthGuard} from './services/authguard.service';
 import {ChangePasswordComponent} from './components/changepassword/changepassword.component';
 import {ChangePhoneComponent} from './components/changephone/changephone.component';
 import {EmployeeSecurityQuestionsComponent} from './components/securityquestions/securityquestions.component';
-import { SafePipePipe } from './pipes/safe-pipe.pipe';
-import { TermsConditionsComponentComponent } from './components/terms-conditions-component/terms-conditions-component.component';
+import {SafePipePipe} from './pipes/safe-pipe.pipe';
+import {TermsConditionsComponentComponent} from './components/terms-conditions-component/terms-conditions-component.component';
 import {AlertPrintComponent, ContractComponentComponent} from './components/contract-component/contract-component.component';
 import {EmployeeService} from './services/employee.service';
-import { SessionTimeoutDialogComponent } from './components/session-timeout-dialog/session-timeout-dialog.component';
-import { ForgotMyPasswordComponent } from './components/forgot-my-password/forgot-my-password.component';
+import {SessionTimeoutDialogComponent} from './components/session-timeout-dialog/session-timeout-dialog.component';
+import {ForgotMyPasswordComponent} from './components/forgot-my-password/forgot-my-password.component';
 import {DownloadComponent} from './components/download-component';
 
 @NgModule({
@@ -61,6 +55,7 @@ import {DownloadComponent} from './components/download-component';
     DocumentSignedNoticeComponent,
     DocumentRejectNoticeComponent,
     LoginAlertDialog,
+    ForgotPasswordDialog,
     Nom151DialogComponent,
     SignatureConfirmDialogComponent,
     RejectReasonDialogComponent,
@@ -87,19 +82,21 @@ import {DownloadComponent} from './components/download-component';
     MatListModule,
     MatIconModule,
     MatMenuModule,
+    MatTableModule,
     AppRoutingModule,
     MatCheckboxModule,
     FormsModule,
-    MatSortModule,
     MatSnackBarModule,
     ReactiveFormsModule,
     HttpModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSelectModule,
+    MatProgressSpinnerModule
   ],
   providers: [AuthService, DocumentService, UserService, AuthGuard, EmployeeService],
   bootstrap: [AppComponent],
   entryComponents: [DocumentSignedNoticeComponent, DocumentRejectNoticeComponent, LoginAlertDialog, PasswordAlertDialog,
-    AlertTermsComponent, Nom151DialogComponent, SignatureConfirmDialogComponent, RejectReasonDialogComponent,
+    AlertTermsComponent, Nom151DialogComponent, SignatureConfirmDialogComponent, RejectReasonDialogComponent, ForgotPasswordDialog,
     SessionTimeoutDialogComponent, AlertPrintComponent],
 })
 export class AppModule {
